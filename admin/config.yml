@@ -11,7 +11,7 @@
 
 backend:
   name: github
-  repo: GITHUB_USERNAME/REPO_NAME   # ← change this
+  repo: luigicastello78-ux/Daliv1.1   # ← change this
   branch: main
 
 media_folder: uploads
