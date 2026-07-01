@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@latest/schema/sveltia-cms.json
+backend:
+  name: github
+  repo: GITHUB_USERNAME/REPO_NAME   # ← replace with your GitHub username/repo
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: equipment
+    label: Equipment
+    label_singular: Equipment Item
+    folder: "content/equipment"
+    create: true
+    delete: true
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{name}} — {{subcategory}} ({{category}})"
+    sortable_fields: ["name", "category", "subcategory"]
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "string"
+        hint: "e.g. Shure SLX-D"
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Speakers & PA",  value: "spk" }
+          - { label: "Keyboards",       value: "key" }
+          - { label: "Drums",           value: "drm" }
+          - { label: "Guitars",         value: "gtr" }
+          - { label: "Microphones",     value: "mic" }
+          - { label: "Mixers",          value: "mix" }
+          - { label: "Lighting & FX",   value: "lgt" }
+
+      - label: "Subcategory"
+        name: "subcategory"
+        widget: "string"
+        hint: "e.g. Wireless, Digital consoles, Moving heads — groups items on the category page"
+
+      - label: "Type / Tag"
+        name: "tag"
+        widget: "string"
+        hint: "Short label shown on the card e.g. Digital wireless"
+
+      - label: "Photo"
+        name: "image"
+        widget: "image"
+        required: false
+        allow_multiple: false
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Short description shown on the item card and detail page"
+
+      - label: "Available for rent"
+        name: "available"
+        widget: "boolean"
+        default: true
+        hint: "Uncheck to hide this item from the site without deleting it"
+
+      - label: "Additional notes (body)"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "Optional extra info shown on the item detail page (specs, includes, etc.)"

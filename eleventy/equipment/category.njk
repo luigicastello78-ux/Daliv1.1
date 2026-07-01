@@ -1,0 +1,66 @@
+---
+pagination:
+  data: categories
+  size: 1
+  alias: cat
+permalink: "/equipment/{{ cat.id }}/"
+eleventyExcludeFromCollections: true
+---
+{% extends "layout.njk" %}
+{% set catItems = collections.equipment | byCat(cat.id) %}
+{% set subcatList = collections.equipment | subcats(cat.id) %}
+
+{% block content %}
+<section style="max-width:1100px;margin:0 auto;padding:52px 24px 88px;">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span>
+    <a href="/equipment/">Equipment</a><span class="sep">/</span>
+    <span class="cur">{{ cat.name }}</span>
+  </nav>
+
+  <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;margin:0 0 10px;">{{ cat.name }}</h1>
+  <p style="color:#9b9ba2;font-size:16px;margin:0 0 32px;max-width:600px;">{{ cat.desc }}</p>
+
+  <!-- Subcategory filter pills -->
+  {% if subcatList.length > 1 %}
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;">
+    <button class="sub-filter active" data-filter="all" type="button">All ({{ catItems.length }})</button>
+    {% for sub in subcatList %}
+    {% set subItems = catItems | bySub(sub) %}
+    <button class="sub-filter" data-filter="{{ sub }}" type="button">{{ sub }} ({{ subItems.length }})</button>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Items grid -->
+  {% if catItems.length %}
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;">
+    {% for item in catItems %}
+    <a href="{{ item.url }}" class="item-card" data-subcat="{{ item.data.subcategory }}">
+      <div style="position:relative;aspect-ratio:4/3;{% if item.data.image %}background:url('{{ item.data.image }}') center/cover;{% else %}background:repeating-linear-gradient(135deg,#191a1d,#191a1d 11px,#141417 11px,#141417 22px);{% endif %}">
+        {% if not item.data.image %}
+        <span style="position:absolute;top:10px;left:12px;font-size:11px;color:#6f6f76;">[ photo ]</span>
+        {% endif %}
+        <span style="position:absolute;top:10px;right:12px;font-size:11px;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,.6);color:#ff5a1f;font-weight:600;font-family:'Sora',sans-serif;">{{ item.data.subcategory }}</span>
+      </div>
+      <div style="padding:16px 18px;display:flex;flex-direction:column;gap:4px;flex:1;">
+        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:17px;margin:0;">{{ item.data.name }}</h2>
+        <span style="color:#9b9ba2;font-size:13px;">{{ item.data.tag }}</span>
+        {% if item.data.description %}
+        <p style="color:#a6a6ad;font-size:13px;line-height:1.5;margin:6px 0 0;">{{ item.data.description | truncate(80) }}</p>
+        {% endif %}
+        <span style="margin-top:12px;color:#ff5a1f;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;">View details →</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div style="padding:64px 0;text-align:center;color:#86868d;">
+    <p style="font-size:16px;">No items in this category yet — add some via the <a href="/admin/" style="color:#ff5a1f;">admin panel</a>.</p>
+  </div>
+  {% endif %}
+
+</section>
+{% endblock %}

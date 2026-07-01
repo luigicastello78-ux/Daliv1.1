@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#0b0b0d;color:#f3f3f2;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--accent,#ff5a1f);color:#0b0b0d;}
+  input,select,textarea{font-family:'Archivo',sans-serif;}
+  @keyframes eqbar{0%,100%{transform:scaleY(.32)}50%{transform:scaleY(1)}}
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#0b0b0d">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0b0b0d"/>
+    <g transform="translate(470,300)">
+      <rect x="0" y="100" width="34" height="90" rx="8" fill="#ff5a1f"/>
+      <rect x="52" y="20" width="34" height="170" rx="8" fill="#ff5a1f"/>
+      <rect x="104" y="70" width="34" height="120" rx="8" fill="#ffffff"/>
+      <rect x="156" y="40" width="34" height="150" rx="8" fill="#ff5a1f"/>
+      <rect x="208" y="110" width="34" height="80" rx="8" fill="#ffffff"/>
+    </g>
+    <text x="600" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="58" letter-spacing="10" fill="#ffffff">DALI<tspan fill="#ff5a1f">SOUND</tspan></text>
+  </svg>
+</template>
+
+<sc-if value="{{ showOverlay }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;inset:0;z-index:100;background:radial-gradient(120% 110% at 50% -10%, color-mix(in srgb,var(--accent,#ff5a1f) 20%, #0b0b0d) 0%, #0b0b0d 52%);display:flex;align-items:center;justify-content:center;padding:32px;overflow:auto;">
+    <div style="max-width:780px;width:100%;text-align:center;">
+      <div style="display:inline-flex;align-items:flex-end;gap:4px;height:34px;justify-content:center;">
+        <div style="width:6px;height:46%;background:var(--accent,#ff5a1f);border-radius:3px;"></div>
+        <div style="width:6px;height:100%;background:var(--accent,#ff5a1f);border-radius:3px;"></div>
+        <div style="width:6px;height:64%;background:#fff;border-radius:3px;"></div>
+        <div style="width:6px;height:88%;background:var(--accent,#ff5a1f);border-radius:3px;"></div>
+        <div style="width:6px;height:40%;background:#fff;border-radius:3px;"></div>
+      </div>
+      <div style="font-family:'Sora';font-weight:800;font-size:24px;letter-spacing:.16em;color:#fff;margin-top:14px;">DALI<span style="color:var(--accent,#ff5a1f);">SOUND</span></div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,#ff5a1f);margin-top:26px;">{{ ov.kicker }}</div>
+      <h1 style="font-family:'Sora';font-weight:800;font-size:clamp(30px,5vw,52px);line-height:1.05;letter-spacing:-.02em;margin:14px 0 12px;">{{ ov.title }}</h1>
+      <p style="color:#a9a9b0;font-size:16px;line-height:1.6;max-width:520px;margin:0 auto;">{{ ov.sub }}</p>
+      <div style="margin-top:34px;display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;">
+        <sc-for list="{{ langCards }}" as="l" hint-placeholder-count="10">
+          <button onClick="{{ l.onPick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;cursor:pointer;color:#fff;transition:all .15s;text-align:left;" style-hover="background:color-mix(in srgb,var(--accent,#ff5a1f) 14%, transparent);border-color:var(--accent,#ff5a1f);transform:translateY(-2px);">
+            <span style="font-family:'Sora';font-weight:700;font-size:16px;">{{ l.name }}</span>
+            <span style="font-family:'Archivo';font-size:11px;letter-spacing:.14em;color:#86868d;font-weight:600;">{{ l.upper }} →</span>
+          </button>
+        </sc-for>
+      </div>
+      <p style="color:#6f6f76;font-size:13px;margin-top:26px;">{{ ov.note }}</p>
+    </div>
+  </div>
+</sc-if>
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,11,13,.74);border-bottom:1px solid rgba(255,255,255,.07);">
+  <div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:22px;">
+    <a href="#top" onClick="{{ goHomeLang }}" style="display:flex;align-items:center;gap:11px;text-decoration:none;flex:0 0 auto;cursor:pointer;">
+      <div style="display:flex;align-items:flex-end;gap:3px;height:22px;">
+        <div style="width:4px;height:45%;background:var(--accent,#ff5a1f);border-radius:2px;"></div>
+        <div style="width:4px;height:100%;background:var(--accent,#ff5a1f);border-radius:2px;"></div>
+        <div style="width:4px;height:64%;background:#fff;border-radius:2px;"></div>
+        <div style="width:4px;height:85%;background:var(--accent,#ff5a1f);border-radius:2px;"></div>
+        <div style="width:4px;height:40%;background:#fff;border-radius:2px;"></div>
+      </div>
+      <span style="font-family:'Sora';font-weight:800;font-size:17px;letter-spacing:.14em;color:#fff;">DALI<span style="color:var(--accent,#ff5a1f);">SOUND</span></span>
+    </a>
+    <nav style="margin-left:auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:flex-end;">
+      <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="7">
+        <a href="{{ it.href }}" onClick="{{ it.onNav }}" style="color:#c4c4ca;text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap;" style-hover="color:#fff;">{{ it.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="position:relative;flex:0 0 auto;">
+      <button onClick="{{ toggleLangMenu }}" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.06em;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--accent,#ff5a1f);display:inline-block;"></span>{{ curCode }} <span style="font-size:9px;color:#9a9aa0;">▼</span>
+      </button>
+      <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;right:0;top:calc(100% + 8px);background:#141417;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:6px;min-width:190px;box-shadow:0 18px 44px rgba(0,0,0,.55);max-height:340px;overflow:auto;">
+          <sc-for list="{{ langCards }}" as="l" hint-placeholder-count="10">
+            <button onClick="{{ l.onChoose }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:transparent;border:none;color:#e7e7ea;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:14px;text-align:left;" style-hover="background:rgba(255,255,255,.06);">
+              <span>{{ l.name }}</span><span style="font-family:'Archivo';font-size:11px;color:#86868d;letter-spacing:.1em;">{{ l.upper }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <a href="#contact" onClick="{{ goContact }}" style="flex:0 0 auto;padding:9px 16px;border-radius:10px;background:var(--accent,#ff5a1f);color:#0b0b0d;font-weight:700;font-size:13px;text-decoration:none;font-family:'Sora';white-space:nowrap;">{{ navCta }}</a>
+  </div>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<section id="top" style="position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06);">
+  <div style="position:absolute;inset:0;background:radial-gradient(70% 60% at 72% -5%, color-mix(in srgb,var(--accent,#ff5a1f) 22%, transparent) 0%, transparent 58%);pointer-events:none;"></div>
+  <div style="max-width:1200px;margin:0 auto;padding:78px 24px 66px;display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;position:relative;">
+    <div>
+      <span style="display:inline-block;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent,#ff5a1f);border:1px solid color-mix(in srgb,var(--accent,#ff5a1f) 40%, transparent);padding:6px 13px;border-radius:999px;background:color-mix(in srgb,var(--accent,#ff5a1f) 9%, transparent);">{{ hero.badge }}</span>
+      <h1 style="font-family:'Sora';font-weight:800;font-size:clamp(36px,5.2vw,64px);line-height:1.03;letter-spacing:-.025em;margin:20px 0 18px;text-wrap:balance;">{{ hero.title }}</h1>
+      <p style="color:#b3b3ba;font-size:clamp(16px,1.5vw,19px);line-height:1.6;max-width:560px;">{{ hero.sub }}</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;">
+        <a href="#contact" style="padding:15px 24px;border-radius:12px;background:var(--accent,#ff5a1f);color:#0b0b0d;font-weight:700;font-size:15px;text-decoration:none;font-family:'Sora';box-shadow:0 12px 34px color-mix(in srgb,var(--accent,#ff5a1f) 28%, transparent);">{{ hero.cta1 }}</a>
+        <a href="#equipment" style="padding:15px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:15px;text-decoration:none;">{{ hero.cta2 }}</a>
+      </div>
+      <sc-if value="{{ statShow }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:40px;margin-top:46px;flex-wrap:wrap;">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+            <div>
+              <div style="font-family:'Sora';font-weight:800;font-size:30px;color:#fff;">{{ s.v }}</div>
+              <div style="color:#8f8f96;font-size:13px;margin-top:3px;">{{ s.l }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <div style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:repeating-linear-gradient(135deg,#161619,#161619 14px,#121214 14px,#121214 28px);">
+      <div style="position:absolute;inset:0;background:radial-gradient(80% 50% at 50% 100%, color-mix(in srgb,var(--accent,#ff5a1f) 30%, transparent), transparent 70%);"></div>
+      {{ eqEl }}
+      <span style="position:absolute;top:14px;left:14px;font-family:'Archivo';font-size:11px;letter-spacing:.08em;color:#7a7a80;background:rgba(0,0,0,.45);padding:5px 9px;border-radius:7px;">[ stage photo ]</span>
+    </div>
+  </div>
+</section>
+
+<section id="equipment" style="padding:88px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:42px;flex-wrap:wrap;">
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0;max-width:620px;text-wrap:balance;">{{ catsHead.title }}</h2>
+      <p style="color:#9b9ba2;max-width:360px;margin:0;font-size:15px;line-height:1.55;">{{ catsHead.sub }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:18px;">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+        <div onClick="{{ c.onOpen }}" style="background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;transition:all .18s;cursor:pointer;" style-hover="border-color:var(--accent,#ff5a1f);transform:translateY(-3px);">
+          <div style="position:relative;aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#191a1d,#191a1d 11px,#141417 11px,#141417 22px);">
+            <span style="position:absolute;bottom:10px;left:12px;font-family:'Archivo';font-size:11px;letter-spacing:.08em;color:#6f6f76;background:rgba(0,0,0,.4);padding:4px 8px;border-radius:6px;">photo: {{ c.tag }}</span>
+            <span style="position:absolute;top:10px;right:12px;font-family:'Sora';font-weight:700;font-size:13px;color:color-mix(in srgb,var(--accent,#ff5a1f) 85%, #fff);">{{ c.num }}</span>
+          </div>
+          <div style="padding:18px;">
+            <h3 style="font-family:'Sora';font-weight:700;font-size:18px;margin:0 0 7px;">{{ c.n }}</h3>
+            <p style="color:#9b9ba2;font-size:14px;line-height:1.5;margin:0;">{{ c.d }}</p>
+            <div style="margin-top:13px;display:flex;align-items:center;gap:6px;color:var(--accent,#ff5a1f);font-size:13px;font-weight:600;font-family:'Sora';">{{ c.view }} →</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="padding:88px 0;background:#0e0e11;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="margin-bottom:46px;max-width:620px;">
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0 0 12px;">{{ howHead.title }}</h2>
+      <p style="color:#9b9ba2;margin:0;font-size:15px;line-height:1.55;">{{ howHead.sub }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="position:relative;">
+          <div style="font-family:'Sora';font-weight:800;font-size:38px;color:var(--accent,#ff5a1f);line-height:1;">{{ s.num }}</div>
+          <div style="height:1px;background:linear-gradient(90deg,color-mix(in srgb,var(--accent,#ff5a1f) 60%, transparent),transparent);margin:16px 0 16px;"></div>
+          <h3 style="font-family:'Sora';font-weight:700;font-size:18px;margin:0 0 8px;">{{ s.t }}</h3>
+          <p style="color:#9b9ba2;font-size:14px;line-height:1.55;margin:0;">{{ s.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="packages" style="padding:88px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="margin-bottom:44px;max-width:620px;">
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0 0 12px;">{{ pkHead.title }}</h2>
+      <p style="color:#9b9ba2;margin:0;font-size:15px;line-height:1.55;">{{ pkHead.sub }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+      <sc-for list="{{ packages }}" as="p" hint-placeholder-count="3">
+        <div style="position:relative;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:28px;overflow:hidden;transition:all .18s;" style-hover="border-color:var(--accent,#ff5a1f);background:rgba(255,255,255,.05);">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent,#ff5a1f),color-mix(in srgb,var(--accent,#ff5a1f) 20%, transparent));"></div>
+          <div style="font-family:'Sora';font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent,#ff5a1f);">{{ p.tag }}</div>
+          <h3 style="font-family:'Sora';font-weight:800;font-size:24px;margin:10px 0 12px;">{{ p.n }}</h3>
+          <p style="color:#a6a6ad;font-size:15px;line-height:1.6;margin:0 0 24px;min-height:72px;">{{ p.d }}</p>
+          <a href="#contact" style="display:inline-block;padding:11px 18px;border-radius:10px;border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:600;font-size:14px;text-decoration:none;" style-hover="background:var(--accent,#ff5a1f);color:#0b0b0d;border-color:var(--accent,#ff5a1f);">{{ pkCta }}</a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="padding:88px 0;background:#0e0e11;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="margin-bottom:44px;max-width:620px;">
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0 0 12px;">{{ whyHead.title }}</h2>
+      <p style="color:#9b9ba2;margin:0;font-size:15px;line-height:1.55;">{{ whyHead.sub }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+      <sc-for list="{{ whys }}" as="w" hint-placeholder-count="4">
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;">
+          <div style="width:14px;height:14px;background:var(--accent,#ff5a1f);transform:rotate(45deg);border-radius:3px;margin-bottom:18px;"></div>
+          <h3 style="font-family:'Sora';font-weight:700;font-size:17px;margin:0 0 8px;">{{ w.t }}</h3>
+          <p style="color:#9b9ba2;font-size:14px;line-height:1.55;margin:0;">{{ w.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="padding:88px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="margin-bottom:42px;max-width:620px;">
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0 0 12px;">{{ galHead.title }}</h2>
+      <p style="color:#9b9ba2;margin:0;font-size:15px;line-height:1.55;">{{ galHead.sub }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;">
+      <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="6">
+        <div style="position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:repeating-linear-gradient(135deg,#191a1d,#191a1d 12px,#141417 12px,#141417 24px);">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.55));"></div>
+          <span style="position:absolute;top:12px;left:12px;font-family:'Archivo';font-size:11px;letter-spacing:.08em;color:#6f6f76;">[ photo ]</span>
+          <span style="position:absolute;bottom:14px;left:14px;font-family:'Sora';font-weight:600;font-size:15px;color:#fff;">{{ g }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding:88px 0;background:#0e0e11;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);">
+  <div style="max-width:860px;margin:0 auto;padding:0 24px;">
+    <div style="margin-bottom:38px;">
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0 0 12px;">{{ faqHead.title }}</h2>
+      <p style="color:#9b9ba2;margin:0;font-size:15px;line-height:1.55;">{{ faqHead.sub }}</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <sc-for list="{{ faqList }}" as="f" hint-placeholder-count="5">
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden;">
+          <button onClick="{{ f.onToggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:transparent;border:none;color:#fff;padding:20px 22px;cursor:pointer;text-align:left;font-family:'Sora';font-weight:600;font-size:17px;">
+            <span>{{ f.q }}</span>
+            <span style="flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--accent,#ff5a1f) 16%, transparent);color:var(--accent,#ff5a1f);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;">{{ f.sign }}</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <p style="color:#a6a6ad;font-size:15px;line-height:1.65;margin:0;padding:0 22px 22px;">{{ f.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding:88px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;">
+    <div>
+      <h2 style="font-family:'Sora';font-weight:800;font-size:clamp(28px,3.4vw,42px);letter-spacing:-.02em;margin:0 0 14px;">{{ formT.title }}</h2>
+      <p style="color:#a6a6ad;font-size:16px;line-height:1.6;margin:0 0 32px;max-width:440px;">{{ formT.sub }}</p>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:color-mix(in srgb,var(--accent,#ff5a1f) 14%, transparent);display:flex;align-items:center;justify-content:center;"><div style="width:13px;height:13px;border:2px solid var(--accent,#ff5a1f);border-radius:50%;"></div></div>
+          <div><div style="font-size:12px;color:#86868d;letter-spacing:.06em;">{{ formT.callLabel }}</div><div style="font-family:'Sora';font-weight:600;font-size:16px;">{{ cPhone }}</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:color-mix(in srgb,var(--accent,#ff5a1f) 14%, transparent);display:flex;align-items:center;justify-content:center;"><div style="width:14px;height:11px;border:2px solid var(--accent,#ff5a1f);border-radius:3px;"></div></div>
+          <div><div style="font-size:12px;color:#86868d;letter-spacing:.06em;">{{ formT.emailLabel }}</div><div style="font-family:'Sora';font-weight:600;font-size:16px;">{{ cEmail }}</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:38px;height:38px;border-radius:10px;background:color-mix(in srgb,var(--accent,#ff5a1f) 14%, transparent);display:flex;align-items:center;justify-content:center;"><div style="width:11px;height:11px;background:var(--accent,#ff5a1f);transform:rotate(45deg);border-radius:2px;"></div></div>
+          <div><div style="font-size:12px;color:#86868d;letter-spacing:.06em;">{{ formT.addrLabel }}</div><div style="font-family:'Sora';font-weight:600;font-size:16px;">{{ cCity }}</div></div>
+        </div>
+      </div>
+    </div>
+    <form onSubmit="{{ onSubmit }}" style="background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:28px;">
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-bottom:18px;padding:14px 16px;border-radius:12px;background:color-mix(in srgb,var(--accent,#ff5a1f) 16%, transparent);border:1px solid color-mix(in srgb,var(--accent,#ff5a1f) 40%, transparent);color:#fff;font-size:14px;font-weight:600;">{{ formT.sent }}</div>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="display:block;font-size:13px;color:#9b9ba2;margin-bottom:7px;font-weight:500;">{{ formT.name }}</label>
+          <input type="text" style="width:100%;background:#101013;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:13px 14px;color:#fff;font-size:15px;" />
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div>
+            <label style="display:block;font-size:13px;color:#9b9ba2;margin-bottom:7px;font-weight:500;">{{ formT.email }}</label>
+            <input type="email" style="width:100%;background:#101013;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:13px 14px;color:#fff;font-size:15px;" />
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;color:#9b9ba2;margin-bottom:7px;font-weight:500;">{{ formT.date }}</label>
+            <input type="date" style="width:100%;background:#101013;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:13px 14px;color:#fff;font-size:15px;color-scheme:dark;" />
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;color:#9b9ba2;margin-bottom:7px;font-weight:500;">{{ formT.type }}</label>
+          <select style="width:100%;background:#101013;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:13px 14px;color:#fff;font-size:15px;">
+            <sc-for list="{{ eventTypes }}" as="opt" hint-placeholder-count="5">
+              <option style="background:#141417;">{{ opt }}</option>
+            </sc-for>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:13px;color:#9b9ba2;margin-bottom:7px;font-weight:500;">{{ formT.msg }}</label>
+          <textarea rows="4" style="width:100%;background:#101013;border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:13px 14px;color:#fff;font-size:15px;resize:vertical;"></textarea>
+        </div>
+        <button type="submit" style="width:100%;padding:15px;border-radius:12px;background:var(--accent,#ff5a1f);color:#0b0b0d;font-family:'Sora';font-weight:700;font-size:16px;border:none;cursor:pointer;box-shadow:0 12px 30px color-mix(in srgb,var(--accent,#ff5a1f) 26%, transparent);">{{ formT.send }}</button>
+      </div>
+    </form>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCatalog }}" hint-placeholder-val="{{ false }}">
+  <section style="max-width:1100px;margin:0 auto;padding:44px 24px 96px;min-height:72vh;">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#86868d;margin-bottom:30px;flex-wrap:wrap;">
+      <button onClick="{{ goHome }}" style="background:none;border:none;color:#86868d;cursor:pointer;font-size:13px;padding:0;font-family:'Archivo';" style-hover="color:#fff;">{{ ui.home }}</button>
+      <span>/</span>
+      <button onClick="{{ onCrumbCat }}" style="background:none;border:none;color:#c4c4ca;cursor:pointer;font-size:13px;padding:0;font-family:'Archivo';" style-hover="color:#fff;">{{ crumbCat }}</button>
+      <sc-if value="{{ isSub }}" hint-placeholder-val="{{ false }}">
+        <span>/</span>
+        <span style="color:var(--accent,#ff5a1f);">{{ crumbSub }}</span>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ isCat }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <button onClick="{{ goHome }}" style="display:inline-flex;align-items:center;gap:7px;background:none;border:1px solid rgba(255,255,255,.14);color:#c4c4ca;cursor:pointer;font-size:13px;padding:8px 14px;border-radius:9px;margin-bottom:26px;font-family:'Archivo';" style-hover="color:#fff;border-color:rgba(255,255,255,.3);">← {{ ui.back }}</button>
+        <h1 style="font-family:'Sora';font-weight:800;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;margin:0 0 8px;">{{ catPage.name }}</h1>
+        <p style="color:#9b9ba2;font-size:16px;margin:0 0 36px;">{{ ui.chooseType }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:16px;">
+          <sc-for list="{{ catPage.subs }}" as="s" hint-placeholder-count="4">
+            <button onClick="{{ s.onOpen }}" style="display:flex;flex-direction:column;align-items:stretch;text-align:left;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;color:#fff;transition:all .18s;font-family:'Archivo';" style-hover="border-color:var(--accent,#ff5a1f);transform:translateY(-3px);">
+              <div style="aspect-ratio:16/9;background:repeating-linear-gradient(135deg,#191a1d,#191a1d 11px,#141417 11px,#141417 22px);"></div>
+              <div style="padding:16px 18px 18px;">
+                <h3 style="font-family:'Sora';font-weight:700;font-size:18px;margin:0 0 6px;">{{ s.name }}</h3>
+                <span style="color:var(--accent,#ff5a1f);font-size:13px;font-weight:600;">{{ s.count }} {{ ui.models }} →</span>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSub }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <button onClick="{{ subPage.onBack }}" style="display:inline-flex;align-items:center;gap:7px;background:none;border:1px solid rgba(255,255,255,.14);color:#c4c4ca;cursor:pointer;font-size:13px;padding:8px 14px;border-radius:9px;margin-bottom:26px;font-family:'Archivo';" style-hover="color:#fff;border-color:rgba(255,255,255,.3);">← {{ ui.back }}</button>
+        <h1 style="font-family:'Sora';font-weight:800;font-size:clamp(30px,4vw,46px);letter-spacing:-.02em;margin:0 0 8px;">{{ subPage.name }}</h1>
+        <p style="color:#9b9ba2;font-size:16px;margin:0 0 36px;">{{ subPage.catName }} · {{ subPage.count }} {{ ui.models }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:16px;">
+          <sc-for list="{{ subPage.items }}" as="p" hint-placeholder-count="6">
+            <div style="background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .18s;" style-hover="border-color:var(--accent,#ff5a1f);">
+              <div style="{{ p.imgBoxStyle }}">
+                <span style="position:absolute;top:10px;left:12px;font-family:'Archivo';font-size:11px;color:#6f6f76;">{{ p.imgLabel }}</span>
+              </div>
+              <div style="padding:16px 18px;display:flex;flex-direction:column;gap:6px;flex:1;">
+                <h3 style="font-family:'Sora';font-weight:700;font-size:17px;margin:0;">{{ p.n }}</h3>
+                <span style="color:#9b9ba2;font-size:13px;">{{ p.tag }}</span>
+                <button onClick="{{ goContact }}" style="margin-top:12px;align-self:flex-start;background:color-mix(in srgb,var(--accent,#ff5a1f) 14%, transparent);color:var(--accent,#ff5a1f);border:1px solid color-mix(in srgb,var(--accent,#ff5a1f) 40%, transparent);padding:8px 14px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Sora';" style-hover="background:var(--accent,#ff5a1f);color:#0b0b0d;">{{ ui.request }}</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+</sc-if>
+
+<footer style="border-top:1px solid rgba(255,255,255,.08);padding:46px 0 40px;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="display:flex;align-items:flex-end;gap:3px;height:18px;">
+          <div style="width:3.5px;height:45%;background:var(--accent,#ff5a1f);border-radius:2px;"></div>
+          <div style="width:3.5px;height:100%;background:var(--accent,#ff5a1f);border-radius:2px;"></div>
+          <div style="width:3.5px;height:64%;background:#fff;border-radius:2px;"></div>
+          <div style="width:3.5px;height:85%;background:var(--accent,#ff5a1f);border-radius:2px;"></div>
+        </div>
+        <span style="font-family:'Sora';font-weight:800;font-size:15px;letter-spacing:.14em;color:#fff;">DALI<span style="color:var(--accent,#ff5a1f);">SOUND</span></span>
+      </div>
+      <p style="color:#86868d;font-size:14px;margin:0;max-width:360px;line-height:1.55;">{{ foot.tag }}</p>
+    </div>
+    <p style="color:#6f6f76;font-size:13px;margin:0;">{{ foot.rights }}</p>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#ff5a1f&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;defaultLanguage&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;en&quot;,&quot;de&quot;,&quot;fr&quot;,&quot;es&quot;,&quot;sr&quot;,&quot;bs&quot;,&quot;hr&quot;,&quot;mk&quot;,&quot;bg&quot;,&quot;tr&quot;], &quot;default&quot;: &quot;en&quot;, &quot;tsType&quot;: &quot;string&quot; },
+  &quot;showStats&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; },
+  &quot;alwaysShowWelcome&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  state = { lang: 'en', showOverlay: true, langMenuOpen: false, openFaq: 0, sent: false, route: { level: 'home' }, catalogData: null };
+
+  LANGS = [
+    { code: 'en', name: 'English' },
+    { code: 'de', name: 'Deutsch' },
+    { code: 'fr', name: 'Français' },
+    { code: 'es', name: 'Español' },
+    { code: 'sr', name: 'Srpski' },
+    { code: 'bs', name: 'Bosanski' },
+    { code: 'hr', name: 'Hrvatski' },
+    { code: 'mk', name: 'Македонски' },
+    { code: 'bg', name: 'Български' },
+    { code: 'tr', name: 'Türkçe' }
+  ];
+
+  TAGS = ['speakers','keyboards','drums','guitars','mics','mixers','lighting'];
+
+  CATALOG_IDS = ['spk','key','drm','gtr','mic','mix','lgt'];
+
+  CATALOG = {
+    spk: [
+      [ {n:'RCF HDL 50-A',tag:'Active line array'}, {n:'RCF HDL 30-A',tag:'Active line array'}, {n:'RCF HDL 6-A',tag:'Compact line array'} ],
+      [ {n:'RCF ART 945-A',tag:'Active full-range'}, {n:'RCF ART 932-A',tag:'Active full-range'}, {n:'RCF ART 912-A',tag:'Active full-range'} ],
+      [ {n:'RCF SUB 9007-AS',tag:'Active subwoofer'}, {n:'RCF SUB 8004-AS',tag:'Active subwoofer'}, {n:'RCF SUB 905-AS',tag:'Active subwoofer'} ],
+      [ {n:'RCF NX 12-SMA',tag:'Stage monitor'}, {n:'RCF TT 08-AS',tag:'Stage monitor'}, {n:'RCF ART 715-A',tag:'Multi-purpose monitor'} ]
+    ],
+    key: [
+      [ {n:'Nord Stage 4',tag:'Stage piano'}, {n:'Yamaha CP88',tag:'Stage piano'}, {n:'Roland RD-2000',tag:'Stage piano'} ],
+      [ {n:'Korg Minilogue',tag:'Analog synth'}, {n:'Roland Juno-X',tag:'Synthesizer'}, {n:'Moog Subsequent 37',tag:'Analog synth'} ],
+      [ {n:'Korg Kronos',tag:'Workstation'}, {n:'Yamaha Montage M',tag:'Workstation'}, {n:'Roland Fantom',tag:'Workstation'} ],
+      [ {n:'Akai MPK261',tag:'MIDI controller'}, {n:'Arturia KeyLab 88',tag:'MIDI controller'}, {n:'NI Komplete Kontrol',tag:'MIDI controller'} ]
+    ],
+    drm: [
+      [ {n:'Pearl Masters',tag:'Acoustic kit'}, {n:'Yamaha Stage Custom',tag:'Acoustic kit'}, {n:'DW Performance',tag:'Acoustic kit'} ],
+      [ {n:'Roland TD-27',tag:'Electronic kit'}, {n:'Yamaha DTX10',tag:'Electronic kit'}, {n:'Alesis Strike Pro',tag:'Electronic kit'} ],
+      [ {n:'Zildjian A Custom',tag:'Cymbal pack'}, {n:'Sabian AAX',tag:'Cymbal pack'}, {n:'Hardware pack',tag:'Stands & pedals'} ],
+      [ {n:'LP Congas',tag:'Percussion'}, {n:'Cajon',tag:'Percussion'}, {n:'Roland SPD-SX',tag:'Sampling pad'} ]
+    ],
+    gtr: [
+      [ {n:'Fender Stratocaster',tag:'Electric guitar'}, {n:'Gibson Les Paul',tag:'Electric guitar'}, {n:'PRS SE',tag:'Electric guitar'} ],
+      [ {n:'Taylor 214ce',tag:'Acoustic guitar'}, {n:'Martin D-28',tag:'Acoustic guitar'}, {n:'Yamaha FG',tag:'Acoustic guitar'} ],
+      [ {n:'Fender Jazz Bass',tag:'Bass guitar'}, {n:'Music Man StingRay',tag:'Bass guitar'}, {n:'Ibanez SR',tag:'Bass guitar'} ],
+      [ {n:'Fender Twin Reverb',tag:'Guitar amp'}, {n:'Marshall JCM800',tag:'Guitar amp'}, {n:'Ampeg SVT',tag:'Bass amp'} ]
+    ],
+    mic: [
+      [ {n:'Shure BLX',tag:'Wireless system'}, {n:'Shure SLX-D',tag:'Digital wireless'}, {n:'Shure QLX-D',tag:'Digital wireless'}, {n:'Shure ULX-D',tag:'Digital wireless'}, {n:'Shure Axient Digital',tag:'Digital wireless'}, {n:'Sennheiser EW-DX',tag:'Digital wireless'} ],
+      [ {n:'Shure SM58',tag:'Dynamic vocal mic'}, {n:'Shure SM57',tag:'Dynamic instrument mic'}, {n:'Shure Beta 58A',tag:'Dynamic vocal mic'}, {n:'Sennheiser e835',tag:'Dynamic vocal mic'}, {n:'Sennheiser e945',tag:'Dynamic vocal mic'} ],
+      [ {n:'Shure KSM9',tag:'Condenser vocal mic'}, {n:'Neumann KMS 105',tag:'Condenser vocal mic'}, {n:'AKG C414',tag:'Studio condenser'}, {n:'Rode NT1',tag:'Studio condenser'} ],
+      [ {n:'Shure Beta 91A',tag:'Kick drum mic'}, {n:'Shure SM81',tag:'Instrument condenser'}, {n:'DPA 4099',tag:'Clip-on instrument mic'}, {n:'Sennheiser e904',tag:'Drum mic'} ]
+    ],
+    mix: [
+      [ {n:'Allen & Heath SQ-6',tag:'Digital console'}, {n:'Yamaha CL5',tag:'Digital console'}, {n:'Midas M32',tag:'Digital console'}, {n:'Behringer X32',tag:'Digital console'} ],
+      [ {n:'Allen & Heath GL2400',tag:'Analog console'}, {n:'Soundcraft GB4',tag:'Analog console'}, {n:'Yamaha MG Series',tag:'Analog mixer'} ],
+      [ {n:'Allen & Heath DT168',tag:'Stage box'}, {n:'Midas DL32',tag:'Stage box'}, {n:'Yamaha Rio3224',tag:'Stage box'} ]
+    ],
+    lgt: [
+      [ {n:'Robe Pointe',tag:'Moving head'}, {n:'Martin MAC Aura',tag:'Moving head wash'}, {n:'Chauvet Rogue',tag:'Moving head'} ],
+      [ {n:'LED PAR 64',tag:'PAR wash'}, {n:'Chauvet COLORdash',tag:'LED wash'}, {n:'ADJ Mega Wash',tag:'LED wash'} ],
+      [ {n:'MDG Hazer',tag:'Haze machine'}, {n:'Smoke machine',tag:'Fog effect'}, {n:'CO2 jet',tag:'Special effect'} ]
+    ]
+  };
+
+  SUBS = {
+    en: { spk:['Line arrays','Main speakers','Subwoofers','Stage monitors'], key:['Stage pianos','Synthesizers','Workstations','MIDI controllers'], drm:['Acoustic kits','Electronic kits','Cymbals & hardware','Percussion'], gtr:['Electric guitars','Acoustic guitars','Bass guitars','Amplifiers'], mic:['Wireless','Wired / dynamic','Condenser','Instrument mics'], mix:['Digital consoles','Analog consoles','Stage boxes'], lgt:['Moving heads','Wash & PAR','Haze & effects'] },
+    de: { spk:['Line-Arrays','Hauptlautsprecher','Subwoofer','Bühnenmonitore'], key:['Stagepianos','Synthesizer','Workstations','MIDI-Controller'], drm:['Akustische Sets','E-Drum-Sets','Becken & Hardware','Percussion'], gtr:['E-Gitarren','Akustikgitarren','Bassgitarren','Verstärker'], mic:['Drahtlos','Kabel / dynamisch','Kondensator','Instrumentenmikrofone'], mix:['Digitalpulte','Analogpulte','Stageboxen'], lgt:['Moving Heads','Wash & PAR','Nebel & Effekte'] },
+    fr: { spk:['Line arrays','Enceintes principales','Caissons de basses','Retours de scène'], key:['Pianos de scène','Synthétiseurs','Workstations','Contrôleurs MIDI'], drm:['Batteries acoustiques','Batteries électroniques','Cymbales & accessoires','Percussions'], gtr:['Guitares électriques','Guitares acoustiques','Basses','Amplis'], mic:['Sans fil','Filaire / dynamique','À condensateur','Micros d\u2019instrument'], mix:['Consoles numériques','Consoles analogiques','Stage boxes'], lgt:['Lyres','Wash & PAR','Brouillard & effets'] },
+    es: { spk:['Line arrays','Altavoces principales','Subwoofers','Monitores de escenario'], key:['Pianos de escenario','Sintetizadores','Workstations','Controladores MIDI'], drm:['Baterías acústicas','Baterías electrónicas','Platillos y herrajes','Percusión'], gtr:['Guitarras eléctricas','Guitarras acústicas','Bajos','Amplificadores'], mic:['Inalámbricos','Con cable / dinámicos','De condensador','Micros de instrumento'], mix:['Consolas digitales','Consolas analógicas','Stage boxes'], lgt:['Cabezas móviles','Wash y PAR','Humo y efectos'] },
+    sr: { spk:['Line array','Glavni zvučnici','Subwoofer-i','Bina monitori'], key:['Scenski klaviri','Sintisajzeri','Radne stanice','MIDI kontroleri'], drm:['Akustični setovi','Elektronski setovi','Činele i hardver','Perkusije'], gtr:['Električne gitare','Akustične gitare','Bas gitare','Pojačala'], mic:['Bežični','Žičani / dinamički','Kondenzatorski','Instrumentalni mikrofoni'], mix:['Digitalne miksete','Analogne miksete','Stage box-evi'], lgt:['Pokretne glave','Wash i PAR','Dim i efekti'] },
+    bs: { spk:['Line array','Glavni zvučnici','Subwooferi','Bina monitori'], key:['Scenski klaviri','Sintisajzeri','Radne stanice','MIDI kontroleri'], drm:['Akustični setovi','Elektronski setovi','Činele i hardver','Perkusije'], gtr:['Električne gitare','Akustične gitare','Bas gitare','Pojačala'], mic:['Bežični','Žičani / dinamički','Kondenzatorski','Instrumentalni mikrofoni'], mix:['Digitalne miksete','Analogne miksete','Stage boxevi'], lgt:['Pokretne glave','Wash i PAR','Dim i efekti'] },
+    hr: { spk:['Line array','Glavni zvučnici','Subwooferi','Scenski monitori'], key:['Scenski klaviri','Sintisajzeri','Radne stanice','MIDI kontroleri'], drm:['Akustični setovi','Elektronički setovi','Činele i hardver','Perkusije'], gtr:['Električne gitare','Akustične gitare','Bas gitare','Pojačala'], mic:['Bežični','Žičani / dinamički','Kondenzatorski','Instrumentalni mikrofoni'], mix:['Digitalne miksete','Analogne miksete','Stage boxevi'], lgt:['Pokretne glave','Wash i PAR','Dim i efekti'] },
+    mk: { spk:['Line array','Главни звучници','Субвуфери','Сценски монитори'], key:['Сценски пијана','Синтисајзери','Работни станици','MIDI контролери'], drm:['Акустични сетови','Електронски сетови','Чинели и хардвер','Перкусии'], gtr:['Електрични гитари','Акустични гитари','Бас гитари','Засилувачи'], mic:['Безжични','Жични / динамички','Кондензаторски','Инструментални микрофони'], mix:['Дигитални миксети','Аналогни миксети','Stage box-ови'], lgt:['Подвижни глави','Wash и PAR','Магла и ефекти'] },
+    bg: { spk:['Line array','Основни тонколони','Субуфери','Сценични монитори'], key:['Сценични пиана','Синтезатори','Работни станции','MIDI контролери'], drm:['Акустични комплекти','Електронни комплекти','Чинели и хардуер','Перкусии'], gtr:['Електрически китари','Акустични китари','Бас китари','Усилватели'], mic:['Безжични','Кабелни / динамични','Кондензаторни','Инструментални микрофони'], mix:['Цифрови конзоли','Аналогови конзоли','Stage box-ове'], lgt:['Подвижни глави','Wash и PAR','Дим и ефекти'] },
+    tr: { spk:['Line array','Ana hoparlörler','Subwooferlar','Sahne monitörleri'], key:['Sahne piyanoları','Synthesizerlar','Workstationlar','MIDI kontrolcüler'], drm:['Akustik setler','Elektronik setler','Zil ve donanım','Perküsyon'], gtr:['Elektro gitarlar','Akustik gitarlar','Bas gitarlar','Amfiler'], mic:['Kablosuz','Kablolu / dinamik','Kondenser','Enstrüman mikrofonları'], mix:['Dijital mikserler','Analog mikserler','Stage box\u2019lar'], lgt:['Hareketli kafalar','Wash ve PAR','Sis ve efektler'] }
+  };
+
+  UI = {
+    en: { home:'Home', back:'Back', chooseType:'Choose a type to see available models', models:'models', request:'Request', view:'View models' },
+    de: { home:'Start', back:'Zurück', chooseType:'Wählen Sie einen Typ, um Modelle zu sehen', models:'Modelle', request:'Anfragen', view:'Modelle ansehen' },
+    fr: { home:'Accueil', back:'Retour', chooseType:'Choisissez un type pour voir les modèles', models:'modèles', request:'Demander', view:'Voir les modèles' },
+    es: { home:'Inicio', back:'Volver', chooseType:'Elige un tipo para ver los modelos', models:'modelos', request:'Solicitar', view:'Ver modelos' },
+    sr: { home:'Početna', back:'Nazad', chooseType:'Izaberite tip da vidite modele', models:'modela', request:'Zatraži', view:'Pogledaj modele' },
+    bs: { home:'Početna', back:'Nazad', chooseType:'Odaberite tip da vidite modele', models:'modela', request:'Zatraži', view:'Pogledaj modele' },
+    hr: { home:'Početna', back:'Natrag', chooseType:'Odaberite tip da vidite modele', models:'modela', request:'Zatraži', view:'Pogledaj modele' },
+    mk: { home:'Почетна', back:'Назад', chooseType:'Изберете тип за да ги видите моделите', models:'модели', request:'Побарај', view:'Погледни модели' },
+    bg: { home:'Начало', back:'Назад', chooseType:'Изберете тип, за да видите моделите', models:'модела', request:'Поискай', view:'Виж моделите' },
+    tr: { home:'Ana sayfa', back:'Geri', chooseType:'Modelleri görmek için bir tür seçin', models:'model', request:'İste', view:'Modelleri gör' }
+  };
+
+  contact = { phone: '+000 00 000 0000', email: 'hello@dalisound.com', city: 'Your city · Worldwide' };
+
+  T = {
+    en: {
+      nav: { equipment:'Equipment', packages:'Packages', how:'How it works', gallery:'Gallery', why:'Why us', faq:'FAQ', contact:'Contact', cta:'Get a quote' },
+      ov: { kicker:'Welcome to Dali Sound', title:'Choose your language', sub:'Professional sound & instrument rental for every event.', note:'You can change the language anytime from the menu.' },
+      hero: { badge:'Sound & instrument rental', title:'Gear that makes your event sound unforgettable', sub:'From RCF line arrays to keyboards, drums and microphones — rent professional stage equipment with delivery, setup and on-site support.', cta1:'Get a free quote', cta2:'Browse equipment', stat1:'Events powered', stat2:'Pieces of gear', stat3:'Years on stage' },
+      cats: { title:'Everything you need on stage', sub:'Rent a single piece or a complete setup.', items:[
+        { n:'Speakers & PA', d:'RCF line arrays, tops, subs and full PA systems.' },
+        { n:'Keyboards', d:'All types of keyboards, synths and stage pianos.' },
+        { n:'Drums', d:'Acoustic and electronic drum kits with hardware.' },
+        { n:'Guitars', d:'Electric, acoustic and bass guitars with amps.' },
+        { n:'Microphones', d:'Wired and wireless mics for vocals and instruments.' },
+        { n:'Mixers', d:'Analog and digital mixing consoles of every size.' },
+        { n:'Lighting & FX', d:'Stage lighting, par cans, moving heads and haze.' } ] },
+      how: { title:'Renting is simple', sub:'Perfect sound in four steps.', steps:[
+        { t:'Tell us about your event', d:'Share the date, venue and what you are planning.' },
+        { t:'Get a tailored quote', d:'We recommend the right gear and send a clear price.' },
+        { t:'We deliver & set up', d:'Our crew installs, tunes and tests everything on site.' },
+        { t:'Enjoy the show', d:'We stay on standby and pack down when you are done.' } ] },
+      pk: { title:'Packages for every event', sub:'Ready-made setups, adapted to your occasion.', cta:'Request package', items:[
+        { tag:'Wedding', n:'The Wedding', d:'Ceremony and party sound, wireless mics and warm lighting.' },
+        { tag:'Concert', n:'The Concert', d:'Full stage PA, monitors, backline and a mixing console.' },
+        { tag:'Corporate', n:'The Corporate', d:'Conference audio, podium mics, screens and clean setup.' } ] },
+      why: { title:'Why Dali Sound', sub:'Four reasons clients keep coming back.', items:[
+        { t:'Pro-grade gear', d:'Maintained, road-ready equipment from trusted brands like RCF.' },
+        { t:'Delivery & setup', d:'We bring it, install it and tune it — you do not lift a thing.' },
+        { t:'On-site support', d:'A technician stays on call throughout your event.' },
+        { t:'Across the region', d:'We serve events in many countries and languages.' } ] },
+      gal: { title:'From our past events', sub:'A glimpse of the stages we have powered.', items:['Wedding reception','Open-air concert','Corporate gala','Club night','Festival stage','Private party'] },
+      faq: { title:'Frequently asked questions', sub:'Everything you need to know before you book.', items:[
+        { q:'How far in advance should I book?', a:'As early as possible, especially in peak season — but we will always try to help with last-minute requests.' },
+        { q:'Do you deliver and set up?', a:'Yes. Delivery, installation, tuning and pack-down are all part of our service.' },
+        { q:'Which areas do you cover?', a:'We operate across the region and travel for larger events — just ask.' },
+        { q:'Can I rent a single item?', a:'Absolutely — from one microphone to a full stage, we rent at any scale.' },
+        { q:'What if something fails during the event?', a:'A technician is on standby and we carry backup gear to keep your show running.' } ] },
+      form: { title:'Tell us what you need', sub:'Describe your event and we will put together the perfect setup.', name:'Your name', email:'Email', date:'Event date', type:'Event type', msg:'What do you need?', send:'Send request', sent:'Thanks! We will get back to you very soon.', types:['Wedding','Concert','Corporate','Private party','Other'], callLabel:'Call us', emailLabel:'Email us', addrLabel:'Based in' },
+      foot: { tag:'Professional sound & instrument rental for events of every size.', rights:'© 2026 Dali Sound. All rights reserved.' }
+    },
+    de: {
+      nav: { equipment:'Equipment', packages:'Pakete', how:'Ablauf', gallery:'Galerie', why:'Warum wir', faq:'FAQ', contact:'Kontakt', cta:'Angebot anfragen' },
+      ov: { kicker:'Willkommen bei Dali Sound', title:'Wählen Sie Ihre Sprache', sub:'Professioneller Verleih von Sound und Instrumenten für jedes Event.', note:'Sie können die Sprache jederzeit im Menü ändern.' },
+      hero: { badge:'Sound- & Instrumentenverleih', title:'Equipment, das Ihr Event unvergesslich klingen lässt', sub:'Von RCF-Line-Arrays bis zu Keyboards, Drums und Mikrofonen — mieten Sie professionelles Bühnen-Equipment inklusive Lieferung, Aufbau und Vor-Ort-Support.', cta1:'Kostenloses Angebot', cta2:'Equipment ansehen', stat1:'Events ausgestattet', stat2:'Equipment-Teile', stat3:'Jahre auf der Bühne' },
+      cats: { title:'Alles, was Sie auf der Bühne brauchen', sub:'Mieten Sie einzelne Teile oder ein komplettes Setup.', items:[
+        { n:'Lautsprecher & PA', d:'RCF Line-Arrays, Tops, Subs und komplette PA-Systeme.' },
+        { n:'Keyboards', d:'Alle Arten von Keyboards, Synths und Stagepianos.' },
+        { n:'Drums', d:'Akustische und elektronische Drumkits mit Hardware.' },
+        { n:'Gitarren', d:'E-, Akustik- und Bassgitarren mit Verstärkern.' },
+        { n:'Mikrofone', d:'Kabelgebundene und drahtlose Mikrofone für Gesang und Instrumente.' },
+        { n:'Mischpulte', d:'Analoge und digitale Mischpulte in jeder Größe.' },
+        { n:'Licht & FX', d:'Bühnenlicht, Par-Scheinwerfer, Moving Heads und Nebel.' } ] },
+      how: { title:'Mieten ist einfach', sub:'In vier Schritten zu perfektem Sound.', steps:[
+        { t:'Erzählen Sie uns von Ihrem Event', d:'Teilen Sie Datum, Location und Ihre Pläne mit uns.' },
+        { t:'Maßgeschneidertes Angebot', d:'Wir empfehlen das passende Equipment und nennen einen klaren Preis.' },
+        { t:'Wir liefern & bauen auf', d:'Unser Team installiert, stimmt ab und testet alles vor Ort.' },
+        { t:'Genießen Sie die Show', d:'Wir bleiben in Bereitschaft und bauen danach wieder ab.' } ] },
+      pk: { title:'Pakete für jedes Event', sub:'Fertige Setups, an Ihren Anlass angepasst.', cta:'Paket anfragen', items:[
+        { tag:'Hochzeit', n:'Die Hochzeit', d:'Sound für Zeremonie und Party, Funkmikrofone und warmes Licht.' },
+        { tag:'Konzert', n:'Das Konzert', d:'Komplette Bühnen-PA, Monitore, Backline und Mischpult.' },
+        { tag:'Firmenevent', n:'Das Firmenevent', d:'Konferenz-Audio, Rednermikrofone, Bildschirme und sauberer Aufbau.' } ] },
+      why: { title:'Warum Dali Sound', sub:'Vier Gründe, warum Kunden wiederkommen.', items:[
+        { t:'Profi-Equipment', d:'Gewartetes, bühnenreifes Equipment von Marken wie RCF.' },
+        { t:'Lieferung & Aufbau', d:'Wir bringen, installieren und stimmen alles ab — Sie heben nichts.' },
+        { t:'Vor-Ort-Support', d:'Ein Techniker bleibt während Ihres Events erreichbar.' },
+        { t:'In der ganzen Region', d:'Wir betreuen Events in vielen Ländern und Sprachen.' } ] },
+      gal: { title:'Aus unseren vergangenen Events', sub:'Ein Blick auf die Bühnen, die wir ausgestattet haben.', items:['Hochzeitsempfang','Open-Air-Konzert','Firmen-Gala','Club-Nacht','Festival-Bühne','Privatfeier'] },
+      faq: { title:'Häufige Fragen', sub:'Alles, was Sie vor der Buchung wissen müssen.', items:[
+        { q:'Wie früh sollte ich buchen?', a:'So früh wie möglich, besonders in der Hochsaison — kurzfristige Anfragen versuchen wir aber immer möglich zu machen.' },
+        { q:'Liefern und bauen Sie auf?', a:'Ja. Lieferung, Aufbau, Einmessung und Abbau gehören zu unserem Service.' },
+        { q:'Welche Gebiete decken Sie ab?', a:'Wir sind in der ganzen Region tätig und reisen für größere Events an — fragen Sie einfach.' },
+        { q:'Kann ich auch ein einzelnes Teil mieten?', a:'Natürlich — vom einzelnen Mikrofon bis zur kompletten Bühne vermieten wir in jeder Größe.' },
+        { q:'Was, wenn während des Events etwas ausfällt?', a:'Ein Techniker ist in Bereitschaft und wir führen Ersatz-Equipment mit, damit Ihre Show weiterläuft.' } ] },
+      form: { title:'Sagen Sie uns, was Sie brauchen', sub:'Beschreiben Sie Ihr Event und wir stellen das perfekte Setup zusammen.', name:'Ihr Name', email:'E-Mail', date:'Event-Datum', type:'Event-Typ', msg:'Was brauchen Sie?', send:'Anfrage senden', sent:'Danke! Wir melden uns in Kürze.', types:['Hochzeit','Konzert','Firmenevent','Privatfeier','Sonstiges'], callLabel:'Anrufen', emailLabel:'E-Mail', addrLabel:'Ansässig in' },
+      foot: { tag:'Professioneller Verleih von Sound und Instrumenten für Events jeder Größe.', rights:'© 2026 Dali Sound. Alle Rechte vorbehalten.' }
+    },
+    fr: {
+      nav: { equipment:'Équipement', packages:'Forfaits', how:'Comment ça marche', gallery:'Galerie', why:'Pourquoi nous', faq:'FAQ', contact:'Contact', cta:'Demander un devis' },
+      ov: { kicker:'Bienvenue chez Dali Sound', title:'Choisissez votre langue', sub:'Location professionnelle de son et d\u2019instruments pour chaque événement.', note:'Vous pouvez changer de langue à tout moment dans le menu.' },
+      hero: { badge:'Location de son et d\u2019instruments', title:'Du matériel qui rend votre événement inoubliable', sub:'Des line arrays RCF aux claviers, batteries et microphones — louez du matériel de scène professionnel avec livraison, installation et assistance sur place.', cta1:'Devis gratuit', cta2:'Voir le matériel', stat1:'Événements équipés', stat2:'Pièces de matériel', stat3:'Ans sur scène' },
+      cats: { title:'Tout ce qu\u2019il vous faut sur scène', sub:'Louez une seule pièce ou une configuration complète.', items:[
+        { n:'Enceintes & PA', d:'Line arrays RCF, têtes, caissons et systèmes PA complets.' },
+        { n:'Claviers', d:'Tous types de claviers, synthés et pianos de scène.' },
+        { n:'Batteries', d:'Kits de batterie acoustiques et électroniques avec accessoires.' },
+        { n:'Guitares', d:'Guitares électriques, acoustiques et basses avec amplis.' },
+        { n:'Microphones', d:'Micros filaires et sans fil pour voix et instruments.' },
+        { n:'Tables de mixage', d:'Consoles analogiques et numériques de toutes tailles.' },
+        { n:'Lumière & FX', d:'Éclairage de scène, par, lyres et machines à brouillard.' } ] },
+      how: { title:'Louer, c\u2019est simple', sub:'Un son parfait en quatre étapes.', steps:[
+        { t:'Parlez-nous de votre événement', d:'Indiquez la date, le lieu et ce que vous préparez.' },
+        { t:'Recevez un devis sur mesure', d:'Nous recommandons le bon matériel et un prix clair.' },
+        { t:'Nous livrons et installons', d:'Notre équipe installe, règle et teste tout sur place.' },
+        { t:'Profitez du spectacle', d:'Nous restons disponibles et démontons une fois terminé.' } ] },
+      pk: { title:'Des forfaits pour chaque événement', sub:'Des configurations prêtes, adaptées à votre occasion.', cta:'Demander ce forfait', items:[
+        { tag:'Mariage', n:'Le Mariage', d:'Son pour la cérémonie et la fête, micros sans fil et lumière chaleureuse.' },
+        { tag:'Concert', n:'Le Concert', d:'PA de scène complet, retours, backline et console de mixage.' },
+        { tag:'Entreprise', n:'L\u2019Entreprise', d:'Audio de conférence, micros de pupitre, écrans et installation soignée.' } ] },
+      why: { title:'Pourquoi Dali Sound', sub:'Quatre raisons pour lesquelles nos clients reviennent.', items:[
+        { t:'Matériel pro', d:'Équipement entretenu et prêt pour la scène, de marques comme RCF.' },
+        { t:'Livraison & installation', d:'Nous l\u2019apportons, l\u2019installons et le réglons — vous ne portez rien.' },
+        { t:'Assistance sur place', d:'Un technicien reste disponible pendant tout votre événement.' },
+        { t:'Dans toute la région', d:'Nous couvrons des événements dans de nombreux pays et langues.' } ] },
+      gal: { title:'Nos événements passés', sub:'Un aperçu des scènes que nous avons équipées.', items:['Réception de mariage','Concert en plein air','Gala d\u2019entreprise','Soirée club','Scène de festival','Fête privée'] },
+      faq: { title:'Questions fréquentes', sub:'Tout ce qu\u2019il faut savoir avant de réserver.', items:[
+        { q:'Combien de temps à l\u2019avance réserver ?', a:'Le plus tôt possible, surtout en haute saison — mais nous essayons toujours d\u2019aider pour les demandes de dernière minute.' },
+        { q:'Livrez-vous et installez-vous ?', a:'Oui. La livraison, l\u2019installation, les réglages et le démontage font partie de notre service.' },
+        { q:'Quelles zones couvrez-vous ?', a:'Nous opérons dans toute la région et nous déplaçons pour les grands événements — demandez-nous.' },
+        { q:'Puis-je louer un seul article ?', a:'Bien sûr — d\u2019un seul micro à une scène complète, nous louons à toute échelle.' },
+        { q:'Et si une panne survient pendant l\u2019événement ?', a:'Un technicien est en attente et nous emportons du matériel de secours pour que votre spectacle continue.' } ] },
+      form: { title:'Dites-nous ce qu\u2019il vous faut', sub:'Décrivez votre événement et nous composerons la configuration parfaite.', name:'Votre nom', email:'E-mail', date:'Date de l\u2019événement', type:'Type d\u2019événement', msg:'De quoi avez-vous besoin ?', send:'Envoyer la demande', sent:'Merci ! Nous vous répondrons très vite.', types:['Mariage','Concert','Entreprise','Fête privée','Autre'], callLabel:'Appelez-nous', emailLabel:'Écrivez-nous', addrLabel:'Basés à' },
+      foot: { tag:'Location professionnelle de son et d\u2019instruments pour des événements de toute taille.', rights:'© 2026 Dali Sound. Tous droits réservés.' }
+    },
+    es: {
+      nav: { equipment:'Equipo', packages:'Paquetes', how:'Cómo funciona', gallery:'Galería', why:'Por qué nosotros', faq:'FAQ', contact:'Contacto', cta:'Pedir presupuesto' },
+      ov: { kicker:'Bienvenido a Dali Sound', title:'Elige tu idioma', sub:'Alquiler profesional de sonido e instrumentos para cada evento.', note:'Puedes cambiar el idioma en cualquier momento desde el menú.' },
+      hero: { badge:'Alquiler de sonido e instrumentos', title:'Equipos que hacen que tu evento suene inolvidable', sub:'Desde line arrays RCF hasta teclados, baterías y micrófonos — alquila equipo de escenario profesional con entrega, montaje y soporte en el lugar.', cta1:'Presupuesto gratis', cta2:'Ver equipo', stat1:'Eventos realizados', stat2:'Equipos disponibles', stat3:'Años en el escenario' },
+      cats: { title:'Todo lo que necesitas en el escenario', sub:'Alquila una sola pieza o un montaje completo.', items:[
+        { n:'Altavoces y PA', d:'Line arrays RCF, tops, subwoofers y sistemas PA completos.' },
+        { n:'Teclados', d:'Todo tipo de teclados, sintetizadores y pianos de escenario.' },
+        { n:'Baterías', d:'Baterías acústicas y electrónicas con herrajes.' },
+        { n:'Guitarras', d:'Guitarras eléctricas, acústicas y bajos con amplificadores.' },
+        { n:'Micrófonos', d:'Micrófonos con cable e inalámbricos para voz e instrumentos.' },
+        { n:'Mesas de mezclas', d:'Consolas analógicas y digitales de todos los tamaños.' },
+        { n:'Iluminación y FX', d:'Luces de escenario, focos par, cabezas móviles y máquina de humo.' } ] },
+      how: { title:'Alquilar es sencillo', sub:'Sonido perfecto en cuatro pasos.', steps:[
+        { t:'Cuéntanos sobre tu evento', d:'Comparte la fecha, el lugar y lo que tienes en mente.' },
+        { t:'Recibe un presupuesto a medida', d:'Recomendamos el equipo adecuado y un precio claro.' },
+        { t:'Entregamos y montamos', d:'Nuestro equipo instala, ajusta y prueba todo en el lugar.' },
+        { t:'Disfruta del espectáculo', d:'Permanecemos disponibles y recogemos al terminar.' } ] },
+      pk: { title:'Paquetes para cada evento', sub:'Montajes listos, adaptados a tu ocasión.', cta:'Solicitar paquete', items:[
+        { tag:'Boda', n:'La Boda', d:'Sonido para ceremonia y fiesta, micrófonos inalámbricos y luz cálida.' },
+        { tag:'Concierto', n:'El Concierto', d:'PA de escenario completo, monitores, backline y mesa de mezclas.' },
+        { tag:'Corporativo', n:'El Corporativo', d:'Audio de conferencia, micrófonos de podio, pantallas y montaje limpio.' } ] },
+      why: { title:'Por qué Dali Sound', sub:'Cuatro razones por las que los clientes vuelven.', items:[
+        { t:'Equipo profesional', d:'Equipo mantenido y listo para el escenario, de marcas como RCF.' },
+        { t:'Entrega y montaje', d:'Lo llevamos, instalamos y ajustamos — tú no cargas nada.' },
+        { t:'Soporte en el lugar', d:'Un técnico permanece disponible durante todo tu evento.' },
+        { t:'En toda la región', d:'Atendemos eventos en muchos países e idiomas.' } ] },
+      gal: { title:'De nuestros eventos pasados', sub:'Un vistazo a los escenarios que hemos sonorizado.', items:['Recepción de boda','Concierto al aire libre','Gala corporativa','Noche de club','Escenario de festival','Fiesta privada'] },
+      faq: { title:'Preguntas frecuentes', sub:'Todo lo que necesitas saber antes de reservar.', items:[
+        { q:'¿Con cuánta antelación debo reservar?', a:'Lo antes posible, sobre todo en temporada alta — pero siempre intentamos ayudar con solicitudes de última hora.' },
+        { q:'¿Entregan y montan?', a:'Sí. La entrega, instalación, ajuste y desmontaje forman parte de nuestro servicio.' },
+        { q:'¿Qué zonas cubren?', a:'Operamos en toda la región y viajamos para eventos más grandes — solo pregúntanos.' },
+        { q:'¿Puedo alquilar un solo artículo?', a:'Por supuesto — desde un micrófono hasta un escenario completo, alquilamos a cualquier escala.' },
+        { q:'¿Y si algo falla durante el evento?', a:'Un técnico está de guardia y llevamos equipo de respaldo para que tu espectáculo siga.' } ] },
+      form: { title:'Dinos qué necesitas', sub:'Describe tu evento y prepararemos el montaje perfecto.', name:'Tu nombre', email:'Correo', date:'Fecha del evento', type:'Tipo de evento', msg:'¿Qué necesitas?', send:'Enviar solicitud', sent:'¡Gracias! Te responderemos muy pronto.', types:['Boda','Concierto','Corporativo','Fiesta privada','Otro'], callLabel:'Llámanos', emailLabel:'Escríbenos', addrLabel:'Ubicados en' },
+      foot: { tag:'Alquiler profesional de sonido e instrumentos para eventos de cualquier tamaño.', rights:'© 2026 Dali Sound. Todos los derechos reservados.' }
+    },
+    sr: {
+      nav: { equipment:'Oprema', packages:'Paketi', how:'Kako funkcioniše', gallery:'Galerija', why:'Zašto mi', faq:'FAQ', contact:'Kontakt', cta:'Zatraži ponudu' },
+      ov: { kicker:'Dobrodošli u Dali Sound', title:'Izaberite jezik', sub:'Profesionalni najam ozvučenja i instrumenata za svaki događaj.', note:'Jezik možete promeniti u svakom trenutku iz menija.' },
+      hero: { badge:'Najam ozvučenja i instrumenata', title:'Oprema koja vaš događaj čini nezaboravnim', sub:'Od RCF line array sistema do klavijatura, bubnjeva i mikrofona — iznajmite profesionalnu binsku opremu uz dostavu, montažu i podršku na licu mesta.', cta1:'Besplatna ponuda', cta2:'Pogledaj opremu', stat1:'Opremljenih događaja', stat2:'Komada opreme', stat3:'Godina na bini' },
+      cats: { title:'Sve što vam treba na bini', sub:'Iznajmite jedan komad ili kompletan sistem.', items:[
+        { n:'Zvučnici i PA', d:'RCF line array, topovi, subovi i kompletni PA sistemi.' },
+        { n:'Klavijature', d:'Sve vrste klavijatura, sintisajzera i scenskih klavira.' },
+        { n:'Bubnjevi', d:'Akustični i elektronski bubnjevi sa hardverom.' },
+        { n:'Gitare', d:'Električne, akustične i bas gitare sa pojačalima.' },
+        { n:'Mikrofoni', d:'Žičani i bežični mikrofoni za vokal i instrumente.' },
+        { n:'Miksete', d:'Analogne i digitalne miksete svih veličina.' },
+        { n:'Rasveta i FX', d:'Scenska rasveta, par reflektori, pokretne glave i dim.' } ] },
+      how: { title:'Iznajmljivanje je jednostavno', sub:'Savršen zvuk u četiri koraka.', steps:[
+        { t:'Recite nam o svom događaju', d:'Podelite datum, lokaciju i šta planirate.' },
+        { t:'Dobijte ponudu po meri', d:'Preporučujemo pravu opremu i jasnu cenu.' },
+        { t:'Dostavljamo i montiramo', d:'Naš tim instalira, štimuje i testira sve na licu mesta.' },
+        { t:'Uživajte u nastupu', d:'Ostajemo u pripravnosti i demontiramo nakon završetka.' } ] },
+      pk: { title:'Paketi za svaki događaj', sub:'Gotovi sistemi, prilagođeni vašoj prilici.', cta:'Zatraži paket', items:[
+        { tag:'Venčanje', n:'Venčanje', d:'Ozvučenje za ceremoniju i žurku, bežični mikrofoni i topla rasveta.' },
+        { tag:'Koncert', n:'Koncert', d:'Kompletan binski PA, monitori, backline i mikseta.' },
+        { tag:'Korporativni', n:'Korporativni', d:'Konferencijski zvuk, mikrofoni za govornicu, ekrani i uredna montaža.' } ] },
+      why: { title:'Zašto Dali Sound', sub:'Četiri razloga zašto nam se klijenti vraćaju.', items:[
+        { t:'Profesionalna oprema', d:'Održavana, spremna oprema brendova kao što je RCF.' },
+        { t:'Dostava i montaža', d:'Donosimo, instaliramo i štimujemo — vi ne dižete ništa.' },
+        { t:'Podrška na licu mesta', d:'Tehničar je dostupan tokom celog vašeg događaja.' },
+        { t:'U celom regionu', d:'Opslužujemo događaje u mnogim zemljama i na mnogim jezicima.' } ] },
+      gal: { title:'Sa naših prethodnih događaja', sub:'Pogled na bine koje smo ozvučili.', items:['Svadbeni prijem','Koncert na otvorenom','Korporativna gala','Klupska noć','Festivalska bina','Privatna proslava'] },
+      faq: { title:'Često postavljana pitanja', sub:'Sve što treba da znate pre rezervacije.', items:[
+        { q:'Koliko unapred treba da rezervišem?', a:'Što ranije, posebno u sezoni — ali uvek pokušavamo da pomognemo i kod zahteva u poslednjem trenutku.' },
+        { q:'Da li dostavljate i montirate?', a:'Da. Dostava, montaža, štimovanje i demontaža deo su naše usluge.' },
+        { q:'Koja područja pokrivate?', a:'Radimo u celom regionu i putujemo za veće događaje — samo pitajte.' },
+        { q:'Mogu li iznajmiti samo jedan komad?', a:'Naravno — od jednog mikrofona do cele bine, iznajmljujemo u svakom obimu.' },
+        { q:'Šta ako nešto otkaže tokom događaja?', a:'Tehničar je u pripravnosti i nosimo rezervnu opremu da vaš nastup ne stane.' } ] },
+      form: { title:'Recite nam šta vam treba', sub:'Opišite svoj događaj i složićemo savršen sistem.', name:'Vaše ime', email:'Imejl', date:'Datum događaja', type:'Tip događaja', msg:'Šta vam treba?', send:'Pošalji zahtev', sent:'Hvala! Javljamo se vrlo brzo.', types:['Venčanje','Koncert','Korporativni','Privatna proslava','Ostalo'], callLabel:'Pozovite nas', emailLabel:'Pišite nam', addrLabel:'Sedište' },
+      foot: { tag:'Profesionalni najam ozvučenja i instrumenata za događaje svih veličina.', rights:'© 2026 Dali Sound. Sva prava zadržana.' }
+    },
+    bs: {
+      nav: { equipment:'Oprema', packages:'Paketi', how:'Kako funkcioniše', gallery:'Galerija', why:'Zašto mi', faq:'FAQ', contact:'Kontakt', cta:'Zatraži ponudu' },
+      ov: { kicker:'Dobro došli u Dali Sound', title:'Odaberite jezik', sub:'Profesionalni najam ozvučenja i instrumenata za svaki događaj.', note:'Jezik možete promijeniti u svakom trenutku iz menija.' },
+      hero: { badge:'Najam ozvučenja i instrumenata', title:'Oprema koja vaš događaj čini nezaboravnim', sub:'Od RCF line array sistema do klavijatura, bubnjeva i mikrofona — iznajmite profesionalnu binsku opremu uz dostavu, montažu i podršku na licu mjesta.', cta1:'Besplatna ponuda', cta2:'Pogledaj opremu', stat1:'Opremljenih događaja', stat2:'Komada opreme', stat3:'Godina na bini' },
+      cats: { title:'Sve što vam treba na bini', sub:'Iznajmite jedan komad ili kompletan sistem.', items:[
+        { n:'Zvučnici i PA', d:'RCF line array, topovi, subovi i kompletni PA sistemi.' },
+        { n:'Klavijature', d:'Sve vrste klavijatura, sintisajzera i scenskih klavira.' },
+        { n:'Bubnjevi', d:'Akustični i elektronski bubnjevi s hardverom.' },
+        { n:'Gitare', d:'Električne, akustične i bas gitare s pojačalima.' },
+        { n:'Mikrofoni', d:'Žičani i bežični mikrofoni za vokal i instrumente.' },
+        { n:'Miksete', d:'Analogne i digitalne miksete svih veličina.' },
+        { n:'Rasvjeta i FX', d:'Scenska rasvjeta, par reflektori, pokretne glave i dim.' } ] },
+      how: { title:'Iznajmljivanje je jednostavno', sub:'Savršen zvuk u četiri koraka.', steps:[
+        { t:'Recite nam o svom događaju', d:'Podijelite datum, lokaciju i šta planirate.' },
+        { t:'Dobijte ponudu po mjeri', d:'Preporučujemo pravu opremu i jasnu cijenu.' },
+        { t:'Dostavljamo i montiramo', d:'Naš tim instalira, štima i testira sve na licu mjesta.' },
+        { t:'Uživajte u nastupu', d:'Ostajemo u pripravnosti i demontiramo nakon završetka.' } ] },
+      pk: { title:'Paketi za svaki događaj', sub:'Gotovi sistemi, prilagođeni vašoj prilici.', cta:'Zatraži paket', items:[
+        { tag:'Vjenčanje', n:'Vjenčanje', d:'Ozvučenje za ceremoniju i zabavu, bežični mikrofoni i topla rasvjeta.' },
+        { tag:'Koncert', n:'Koncert', d:'Kompletan binski PA, monitori, backline i mikseta.' },
+        { tag:'Korporativni', n:'Korporativni', d:'Konferencijski zvuk, mikrofoni za govornicu, ekrani i uredna montaža.' } ] },
+      why: { title:'Zašto Dali Sound', sub:'Četiri razloga zašto nam se klijenti vraćaju.', items:[
+        { t:'Profesionalna oprema', d:'Održavana, spremna oprema brendova kao što je RCF.' },
+        { t:'Dostava i montaža', d:'Donosimo, instaliramo i štimamo — vi ne dižete ništa.' },
+        { t:'Podrška na licu mjesta', d:'Tehničar je dostupan tokom cijelog vašeg događaja.' },
+        { t:'U cijeloj regiji', d:'Opslužujemo događaje u mnogim zemljama i na mnogim jezicima.' } ] },
+      gal: { title:'Sa naših prethodnih događaja', sub:'Pogled na bine koje smo ozvučili.', items:['Svadbeni prijem','Koncert na otvorenom','Korporativna gala','Klupska noć','Festivalska bina','Privatna proslava'] },
+      faq: { title:'Često postavljana pitanja', sub:'Sve što trebate znati prije rezervacije.', items:[
+        { q:'Koliko unaprijed trebam rezervirati?', a:'Što ranije, posebno u sezoni — ali uvijek pokušavamo pomoći i kod zahtjeva u posljednjem trenutku.' },
+        { q:'Da li dostavljate i montirate?', a:'Da. Dostava, montaža, štimanje i demontaža dio su naše usluge.' },
+        { q:'Koja područja pokrivate?', a:'Radimo u cijeloj regiji i putujemo za veće događaje — samo pitajte.' },
+        { q:'Mogu li iznajmiti samo jedan komad?', a:'Naravno — od jednog mikrofona do cijele bine, iznajmljujemo u svakom obimu.' },
+        { q:'Šta ako nešto otkaže tokom događaja?', a:'Tehničar je u pripravnosti i nosimo rezervnu opremu da vaš nastup ne stane.' } ] },
+      form: { title:'Recite nam šta vam treba', sub:'Opišite svoj događaj i složit ćemo savršen sistem.', name:'Vaše ime', email:'Email', date:'Datum događaja', type:'Tip događaja', msg:'Šta vam treba?', send:'Pošalji zahtjev', sent:'Hvala! Javljamo se vrlo brzo.', types:['Vjenčanje','Koncert','Korporativni','Privatna proslava','Ostalo'], callLabel:'Pozovite nas', emailLabel:'Pišite nam', addrLabel:'Sjedište' },
+      foot: { tag:'Profesionalni najam ozvučenja i instrumenata za događaje svih veličina.', rights:'© 2026 Dali Sound. Sva prava pridržana.' }
+    },
+    hr: {
+      nav: { equipment:'Oprema', packages:'Paketi', how:'Kako funkcionira', gallery:'Galerija', why:'Zašto mi', faq:'FAQ', contact:'Kontakt', cta:'Zatraži ponudu' },
+      ov: { kicker:'Dobro došli u Dali Sound', title:'Odaberite jezik', sub:'Profesionalni najam ozvučenja i instrumenata za svaki događaj.', note:'Jezik možete promijeniti u svakom trenutku iz izbornika.' },
+      hero: { badge:'Najam ozvučenja i instrumenata', title:'Oprema koja vaš događaj čini nezaboravnim', sub:'Od RCF line array sustava do klavijatura, bubnjeva i mikrofona — iznajmite profesionalnu scensku opremu uz dostavu, montažu i podršku na licu mjesta.', cta1:'Besplatna ponuda', cta2:'Pogledaj opremu', stat1:'Opremljenih događaja', stat2:'Komada opreme', stat3:'Godina na pozornici' },
+      cats: { title:'Sve što vam treba na pozornici', sub:'Iznajmite jedan komad ili kompletan sustav.', items:[
+        { n:'Zvučnici i PA', d:'RCF line array, topovi, subovi i kompletni PA sustavi.' },
+        { n:'Klavijature', d:'Sve vrste klavijatura, sintisajzera i scenskih klavira.' },
+        { n:'Bubnjevi', d:'Akustični i elektronički bubnjevi s hardverom.' },
+        { n:'Gitare', d:'Električne, akustične i bas gitare s pojačalima.' },
+        { n:'Mikrofoni', d:'Žičani i bežični mikrofoni za vokal i instrumente.' },
+        { n:'Miksete', d:'Analogne i digitalne miksete svih veličina.' },
+        { n:'Rasvjeta i FX', d:'Scenska rasvjeta, par reflektori, pokretne glave i dim.' } ] },
+      how: { title:'Iznajmljivanje je jednostavno', sub:'Savršen zvuk u četiri koraka.', steps:[
+        { t:'Recite nam o svom događaju', d:'Podijelite datum, lokaciju i što planirate.' },
+        { t:'Primite ponudu po mjeri', d:'Preporučujemo pravu opremu i jasnu cijenu.' },
+        { t:'Dostavljamo i montiramo', d:'Naš tim instalira, ugađa i testira sve na licu mjesta.' },
+        { t:'Uživajte u nastupu', d:'Ostajemo u pripravnosti i demontiramo nakon završetka.' } ] },
+      pk: { title:'Paketi za svaki događaj', sub:'Gotovi sustavi, prilagođeni vašoj prigodi.', cta:'Zatraži paket', items:[
+        { tag:'Vjenčanje', n:'Vjenčanje', d:'Ozvučenje za ceremoniju i zabavu, bežični mikrofoni i topla rasvjeta.' },
+        { tag:'Koncert', n:'Koncert', d:'Kompletan scenski PA, monitori, backline i mikseta.' },
+        { tag:'Korporativni', n:'Korporativni', d:'Konferencijski zvuk, mikrofoni za govornicu, ekrani i uredna montaža.' } ] },
+      why: { title:'Zašto Dali Sound', sub:'Četiri razloga zašto nam se klijenti vraćaju.', items:[
+        { t:'Profesionalna oprema', d:'Održavana, spremna oprema brendova poput RCF-a.' },
+        { t:'Dostava i montaža', d:'Donosimo, instaliramo i ugađamo — vi ne dižete ništa.' },
+        { t:'Podrška na licu mjesta', d:'Tehničar je dostupan tijekom cijelog vašeg događaja.' },
+        { t:'U cijeloj regiji', d:'Opslužujemo događaje u mnogim zemljama i na mnogim jezicima.' } ] },
+      gal: { title:'S naših prošlih događaja', sub:'Pogled na pozornice koje smo ozvučili.', items:['Svadbeni domjenak','Koncert na otvorenom','Korporativna gala','Klupska noć','Festivalska pozornica','Privatna proslava'] },
+      faq: { title:'Često postavljana pitanja', sub:'Sve što trebate znati prije rezervacije.', items:[
+        { q:'Koliko unaprijed trebam rezervirati?', a:'Što ranije, osobito u sezoni — ali uvijek pokušavamo pomoći i kod zahtjeva u zadnji čas.' },
+        { q:'Dostavljate li i montirate?', a:'Da. Dostava, montaža, ugađanje i demontaža dio su naše usluge.' },
+        { q:'Koja područja pokrivate?', a:'Radimo u cijeloj regiji i putujemo za veće događaje — samo pitajte.' },
+        { q:'Mogu li iznajmiti samo jedan komad?', a:'Naravno — od jednog mikrofona do cijele pozornice, iznajmljujemo u svakom opsegu.' },
+        { q:'Što ako nešto zakaže tijekom događaja?', a:'Tehničar je u pripravnosti i nosimo rezervnu opremu da vaš nastup ne stane.' } ] },
+      form: { title:'Recite nam što trebate', sub:'Opišite svoj događaj i složit ćemo savršen sustav.', name:'Vaše ime', email:'Email', date:'Datum događaja', type:'Vrsta događaja', msg:'Što trebate?', send:'Pošalji upit', sent:'Hvala! Javljamo se vrlo brzo.', types:['Vjenčanje','Koncert','Korporativni','Privatna proslava','Ostalo'], callLabel:'Nazovite nas', emailLabel:'Pišite nam', addrLabel:'Sjedište' },
+      foot: { tag:'Profesionalni najam ozvučenja i instrumenata za događaje svih veličina.', rights:'© 2026 Dali Sound. Sva prava pridržana.' }
+    },
+    mk: {
+      nav: { equipment:'Опрема', packages:'Пакети', how:'Како функционира', gallery:'Галерија', why:'Зошто ние', faq:'ЧПП', contact:'Контакт', cta:'Побарај понуда' },
+      ov: { kicker:'Добредојдовте во Dali Sound', title:'Изберете јазик', sub:'Професионално изнајмување на озвучување и инструменти за секој настан.', note:'Јазикот можете да го промените во секое време од менито.' },
+      hero: { badge:'Изнајмување на озвучување и инструменти', title:'Опрема што го прави вашиот настан незаборавен', sub:'Од RCF line array системи до клавијатури, тапани и микрофони — изнајмете професионална сценска опрема со достава, монтажа и поддршка на самото место.', cta1:'Бесплатна понуда', cta2:'Погледни опрема', stat1:'Опремени настани', stat2:'Парчиња опрема', stat3:'Години на сцена' },
+      cats: { title:'Сè што ви треба на сцена', sub:'Изнајмете едно парче или комплетен систем.', items:[
+        { n:'Звучници и PA', d:'RCF line array, топови, субови и комплетни PA системи.' },
+        { n:'Клавијатури', d:'Сите видови клавијатури, синтисајзери и сценски пијана.' },
+        { n:'Тапани', d:'Акустични и електронски тапани со хардвер.' },
+        { n:'Гитари', d:'Електрични, акустични и бас гитари со засилувачи.' },
+        { n:'Микрофони', d:'Жични и безжични микрофони за вокал и инструменти.' },
+        { n:'Миксети', d:'Аналогни и дигитални миксети од сите големини.' },
+        { n:'Осветлување и FX', d:'Сценско осветлување, пар рефлектори, подвижни глави и магла.' } ] },
+      how: { title:'Изнајмувањето е едноставно', sub:'Совршен звук во четири чекори.', steps:[
+        { t:'Кажете ни за вашиот настан', d:'Споделете датум, локација и што планирате.' },
+        { t:'Добијте понуда по мерка', d:'Ја препорачуваме вистинската опрема и јасна цена.' },
+        { t:'Доставуваме и монтираме', d:'Нашиот тим инсталира, штима и тестира сè на самото место.' },
+        { t:'Уживајте во настапот', d:'Остануваме во приправност и демонтираме по завршувањето.' } ] },
+      pk: { title:'Пакети за секој настан', sub:'Готови системи, прилагодени на вашата прилика.', cta:'Побарај пакет', items:[
+        { tag:'Свадба', n:'Свадба', d:'Озвучување за церемонија и забава, безжични микрофони и топло осветлување.' },
+        { tag:'Концерт', n:'Концерт', d:'Комплетен сценски PA, монитори, backline и миксета.' },
+        { tag:'Корпоративен', n:'Корпоративен', d:'Конференциски звук, микрофони за говорница, екрани и уредна монтажа.' } ] },
+      why: { title:'Зошто Dali Sound', sub:'Четири причини зошто клиентите ни се враќаат.', items:[
+        { t:'Професионална опрема', d:'Одржувана, подготвена опрема од брендови како RCF.' },
+        { t:'Достава и монтажа', d:'Носиме, инсталираме и штимаме — вие не кревате ништо.' },
+        { t:'Поддршка на самото место', d:'Техничар е достапен во текот на целиот ваш настан.' },
+        { t:'Низ целиот регион', d:'Опслужуваме настани во многу земји и на многу јазици.' } ] },
+      gal: { title:'Од нашите минати настани', sub:'Поглед на сцените што ги озвучивме.', items:['Свадбен прием','Концерт на отворено','Корпоративна гала','Клупска ноќ','Фестивалска сцена','Приватна прослава'] },
+      faq: { title:'Често поставувани прашања', sub:'Сè што треба да знаете пред резервација.', items:[
+        { q:'Колку однапред треба да резервирам?', a:'Што порано, особено во сезона — но секогаш се обидуваме да помогнеме и при барања во последен момент.' },
+        { q:'Дали доставувате и монтирате?', a:'Да. Достава, монтажа, штимање и демонтажа се дел од нашата услуга.' },
+        { q:'Кои подрачја ги покривате?', a:'Работиме низ целиот регион и патуваме за поголеми настани — само прашајте.' },
+        { q:'Можам ли да изнајмам само едно парче?', a:'Секако — од еден микрофон до цела сцена, изнајмуваме во секој обем.' },
+        { q:'Што ако нешто откаже за време на настанот?', a:'Техничар е во приправност и носиме резервна опрема за вашиот настап да не запре.' } ] },
+      form: { title:'Кажете ни што ви треба', sub:'Опишете го вашиот настан и ќе составиме совршен систем.', name:'Вашето име', email:'Е-пошта', date:'Датум на настанот', type:'Тип на настан', msg:'Што ви треба?', send:'Испрати барање', sent:'Благодариме! Ќе ви одговориме многу брзо.', types:['Свадба','Концерт','Корпоративен','Приватна прослава','Друго'], callLabel:'Јавете се', emailLabel:'Пишете ни', addrLabel:'Седиште' },
+      foot: { tag:'Професионално изнајмување на озвучување и инструменти за настани од секоја големина.', rights:'© 2026 Dali Sound. Сите права задржани.' }
+    },
+    bg: {
+      nav: { equipment:'Оборудване', packages:'Пакети', how:'Как работи', gallery:'Галерия', why:'Защо нас', faq:'ЧЗВ', contact:'Контакт', cta:'Поискай оферта' },
+      ov: { kicker:'Добре дошли в Dali Sound', title:'Изберете език', sub:'Професионален наем на озвучаване и инструменти за всяко събитие.', note:'Можете да смените езика по всяко време от менюто.' },
+      hero: { badge:'Наем на озвучаване и инструменти', title:'Оборудване, което прави събитието ви незабравимо', sub:'От RCF line array системи до клавиатури, барабани и микрофони — наемете професионално сценично оборудване с доставка, монтаж и поддръжка на място.', cta1:'Безплатна оферта', cta2:'Виж оборудването', stat1:'Обслужени събития', stat2:'Бройки оборудване', stat3:'Години на сцена' },
+      cats: { title:'Всичко необходимо на сцената', sub:'Наемете един артикул или цяла система.', items:[
+        { n:'Тонколони и PA', d:'RCF line array, топове, субуфери и пълни PA системи.' },
+        { n:'Клавиатури', d:'Всички видове клавиатури, синтезатори и сценични пиана.' },
+        { n:'Барабани', d:'Акустични и електронни барабани с хардуер.' },
+        { n:'Китари', d:'Електрически, акустични и бас китари с усилватели.' },
+        { n:'Микрофони', d:'Кабелни и безжични микрофони за вокал и инструменти.' },
+        { n:'Миксери', d:'Аналогови и цифрови миксери от всякакъв размер.' },
+        { n:'Осветление и FX', d:'Сценично осветление, par прожектори, подвижни глави и дим.' } ] },
+      how: { title:'Наемането е лесно', sub:'Перфектен звук в четири стъпки.', steps:[
+        { t:'Разкажете ни за събитието си', d:'Споделете датата, мястото и какво планирате.' },
+        { t:'Получете оферта по мярка', d:'Препоръчваме подходящото оборудване и ясна цена.' },
+        { t:'Доставяме и монтираме', d:'Нашият екип инсталира, настройва и тества всичко на място.' },
+        { t:'Насладете се на шоуто', d:'Оставаме в готовност и демонтираме след края.' } ] },
+      pk: { title:'Пакети за всяко събитие', sub:'Готови системи, съобразени с вашия повод.', cta:'Поискай пакет', items:[
+        { tag:'Сватба', n:'Сватба', d:'Озвучаване за церемония и парти, безжични микрофони и топло осветление.' },
+        { tag:'Концерт', n:'Концерт', d:'Пълна сценична PA, монитори, backline и миксер.' },
+        { tag:'Корпоративен', n:'Корпоративен', d:'Конферентен звук, микрофони за трибуна, екрани и чист монтаж.' } ] },
+      why: { title:'Защо Dali Sound', sub:'Четири причини клиентите да се връщат при нас.', items:[
+        { t:'Професионално оборудване', d:'Поддържано, готово за сцена оборудване от марки като RCF.' },
+        { t:'Доставка и монтаж', d:'Носим, инсталираме и настройваме — вие не вдигате нищо.' },
+        { t:'Поддръжка на място', d:'Техник е на разположение през цялото ви събитие.' },
+        { t:'В целия регион', d:'Обслужваме събития в много държави и на много езици.' } ] },
+      gal: { title:'От нашите минали събития', sub:'Поглед към сцените, които озвучихме.', items:['Сватбено тържество','Концерт на открито','Корпоративна гала','Клубна вечер','Фестивална сцена','Частно парти'] },
+      faq: { title:'Често задавани въпроси', sub:'Всичко, което трябва да знаете преди да резервирате.', items:[
+        { q:'Колко предварително да резервирам?', a:'Колкото е възможно по-рано, особено в сезон — но винаги се опитваме да помогнем и при заявки в последния момент.' },
+        { q:'Доставяте ли и монтирате?', a:'Да. Доставка, монтаж, настройка и демонтаж са част от нашата услуга.' },
+        { q:'Кои райони покривате?', a:'Работим в целия регион и пътуваме за по-големи събития — просто попитайте.' },
+        { q:'Мога ли да наема само един артикул?', a:'Разбира се — от един микрофон до цяла сцена, отдаваме под наем във всякакъв мащаб.' },
+        { q:'Какво става, ако нещо се повреди по време на събитието?', a:'Техник е в готовност и носим резервно оборудване, за да продължи вашето шоу.' } ] },
+      form: { title:'Кажете ни какво ви трябва', sub:'Опишете събитието си и ще съставим перфектната система.', name:'Вашето име', email:'Имейл', date:'Дата на събитието', type:'Тип събитие', msg:'Какво ви трябва?', send:'Изпрати заявка', sent:'Благодарим! Ще се свържем с вас много скоро.', types:['Сватба','Концерт','Корпоративен','Частно парти','Друго'], callLabel:'Обадете се', emailLabel:'Пишете ни', addrLabel:'Базирани в' },
+      foot: { tag:'Професионален наем на озвучаване и инструменти за събития от всякакъв мащаб.', rights:'© 2026 Dali Sound. Всички права запазени.' }
+    },
+    tr: {
+      nav: { equipment:'Ekipman', packages:'Paketler', how:'Nasıl çalışır', gallery:'Galeri', why:'Neden biz', faq:'SSS', contact:'İletişim', cta:'Teklif al' },
+      ov: { kicker:'Dali Sound\u2019a hoş geldiniz', title:'Dilinizi seçin', sub:'Her etkinlik için profesyonel ses ve enstrüman kiralama.', note:'Dili istediğiniz zaman menüden değiştirebilirsiniz.' },
+      hero: { badge:'Ses ve enstrüman kiralama', title:'Etkinliğinizi unutulmaz kılan ekipmanlar', sub:'RCF line array sistemlerinden klavyelere, davullara ve mikrofonlara kadar — teslimat, kurulum ve yerinde destekle profesyonel sahne ekipmanı kiralayın.', cta1:'Ücretsiz teklif', cta2:'Ekipmanlara göz at', stat1:'Donatılan etkinlik', stat2:'Ekipman parçası', stat3:'Sahnede yıl' },
+      cats: { title:'Sahnede ihtiyacınız olan her şey', sub:'Tek bir parça ya da komple bir sistem kiralayın.', items:[
+        { n:'Hoparlörler ve PA', d:'RCF line array, tepe hoparlörler, subwoofer ve komple PA sistemleri.' },
+        { n:'Klavyeler', d:'Her tür klavye, synth ve sahne piyanosu.' },
+        { n:'Davullar', d:'Donanımlı akustik ve elektronik davul setleri.' },
+        { n:'Gitarlar', d:'Amfili elektro, akustik ve bas gitarlar.' },
+        { n:'Mikrofonlar', d:'Vokal ve enstrümanlar için kablolu ve kablosuz mikrofonlar.' },
+        { n:'Mikserler', d:'Her boyutta analog ve dijital mikser.' },
+        { n:'Işık ve FX', d:'Sahne ışığı, par spotlar, hareketli kafalar ve sis.' } ] },
+      how: { title:'Kiralamak çok kolay', sub:'Dört adımda kusursuz ses.', steps:[
+        { t:'Etkinliğinizi anlatın', d:'Tarihi, mekânı ve planınızı bizimle paylaşın.' },
+        { t:'Size özel teklif alın', d:'Doğru ekipmanı önerir, net bir fiyat sunarız.' },
+        { t:'Teslim eder ve kurarız', d:'Ekibimiz her şeyi yerinde kurar, ayarlar ve test eder.' },
+        { t:'Şovun tadını çıkarın', d:'Hazır bekler, bitince toplarız.' } ] },
+      pk: { title:'Her etkinlik için paketler', sub:'Etkinliğinize göre hazır kurulumlar.', cta:'Paket iste', items:[
+        { tag:'Düğün', n:'Düğün', d:'Tören ve parti sesi, kablosuz mikrofonlar ve sıcak ışık.' },
+        { tag:'Konser', n:'Konser', d:'Komple sahne PA\u2019sı, monitörler, backline ve mikser.' },
+        { tag:'Kurumsal', n:'Kurumsal', d:'Konferans sesi, kürsü mikrofonları, ekranlar ve düzenli kurulum.' } ] },
+      why: { title:'Neden Dali Sound', sub:'Müşterilerimizin geri dönmesinin dört nedeni.', items:[
+        { t:'Profesyonel ekipman', d:'RCF gibi markaların bakımlı, sahneye hazır ekipmanı.' },
+        { t:'Teslimat ve kurulum', d:'Getirir, kurar ve ayarlarız — siz hiçbir şey taşımazsınız.' },
+        { t:'Yerinde destek', d:'Etkinliğiniz boyunca bir teknisyen hazır bekler.' },
+        { t:'Tüm bölgede', d:'Birçok ülkede ve dilde etkinliklere hizmet veriyoruz.' } ] },
+      gal: { title:'Geçmiş etkinliklerimizden', sub:'Ses verdiğimiz sahnelerden bir kesit.', items:['Düğün resepsiyonu','Açık hava konseri','Kurumsal gala','Kulüp gecesi','Festival sahnesi','Özel parti'] },
+      faq: { title:'Sıkça sorulan sorular', sub:'Rezervasyondan önce bilmeniz gereken her şey.', items:[
+        { q:'Ne kadar önceden rezervasyon yapmalıyım?', a:'Mümkün olduğunca erken, özellikle yoğun sezonda — ama son dakika talepler için de her zaman yardımcı olmaya çalışırız.' },
+        { q:'Teslimat ve kurulum yapıyor musunuz?', a:'Evet. Teslimat, kurulum, ayar ve toplama hizmetimize dahildir.' },
+        { q:'Hangi bölgeleri kapsıyorsunuz?', a:'Tüm bölgede çalışıyor, büyük etkinlikler için yola çıkıyoruz — sadece sorun.' },
+        { q:'Tek bir parça kiralayabilir miyim?', a:'Elbette — tek bir mikrofondan komple bir sahneye kadar her ölçekte kiralıyoruz.' },
+        { q:'Etkinlik sırasında bir arıza olursa?', a:'Bir teknisyen hazır bekler ve şovunuz aksamasın diye yedek ekipman taşırız.' } ] },
+      form: { title:'Neye ihtiyacınız olduğunu söyleyin', sub:'Etkinliğinizi anlatın, kusursuz kurulumu biz hazırlayalım.', name:'Adınız', email:'E-posta', date:'Etkinlik tarihi', type:'Etkinlik türü', msg:'Neye ihtiyacınız var?', send:'Talep gönder', sent:'Teşekkürler! Çok yakında size döneceğiz.', types:['Düğün','Konser','Kurumsal','Özel parti','Diğer'], callLabel:'Bizi arayın', emailLabel:'Bize yazın', addrLabel:'Merkez' },
+      foot: { tag:'Her ölçekteki etkinlik için profesyonel ses ve enstrüman kiralama.', rights:'© 2026 Dali Sound. Tüm hakları saklıdır.' }
+    }
+  };
+
+  componentDidMount() {
+    let stored = null;
+    try { stored = localStorage.getItem('daliSoundLang'); } catch (e) {}
+    const patch = {};
+    if (stored && this.T[stored]) {
+      patch.lang = stored;
+      if (!this.props.alwaysShowWelcome) patch.showOverlay = false;
+    } else if (this.props.defaultLanguage && this.T[this.props.defaultLanguage]) {
+      patch.lang = this.props.defaultLanguage;
+    }
+    if (Object.keys(patch).length) this.setState(patch);
+    this.applyAccent();
+    fetch('catalog.json').then(r => r.ok ? r.json() : null).then(data => {
+      if (!data) return;
+      const items = Array.isArray(data) ? data : data.items;
+      if (Array.isArray(items) && items.length) this.setState({ catalogData: items });
+    }).catch(() => {});
+  }
+
+  componentDidUpdate(prev) {
+    if (prev.accentColor !== this.props.accentColor) this.applyAccent();
+  }
+
+  applyAccent() {
+    if (this.props.accentColor) document.documentElement.style.setProperty('--accent', this.props.accentColor);
+  }
+
+  pickLang(code) {
+    try { localStorage.setItem('daliSoundLang', code); } catch (e) {}
+    this.setState({ lang: code, showOverlay: false, langMenuOpen: false });
+  }
+  chooseLang(code) {
+    try { localStorage.setItem('daliSoundLang', code); } catch (e) {}
+    this.setState({ lang: code, langMenuOpen: false });
+  }
+  toggleLangMenu() { this.setState(s => ({ langMenuOpen: !s.langMenuOpen })); }
+  toggleFaq(i) { this.setState(s => ({ openFaq: s.openFaq === i ? null : i })); }
+  onSubmit(e) { e.preventDefault(); this.setState({ sent: true }); }
+
+  scrollTop() { try { window.scrollTo(0, 0); } catch (e) {} }
+  openCat(i) { this.setState({ route: { level: 'cat', cat: i }, langMenuOpen: false }); this.scrollTop(); }
+  openSub(cat, sub) { this.setState({ route: { level: 'sub', cat: cat, sub: sub }, langMenuOpen: false }); this.scrollTop(); }
+  goHome() { this.setState({ route: { level: 'home' }, langMenuOpen: false }); this.scrollTop(); }
+  goHomeLang() { this.setState({ route: { level: 'home' }, showOverlay: true, langMenuOpen: false }); this.scrollTop(); }
+  goContact() { this.setState({ route: { level: 'home' }, langMenuOpen: false }); setTimeout(() => { try { location.hash = '#contact'; } catch (e) {} }, 40); }
+  onNav(href) { this.setState({ route: { level: 'home' }, langMenuOpen: false }); setTimeout(() => { try { location.hash = href; } catch (e) {} }, 40); }
+
+  getCatalogFromData(items) {
+    const catMap = {};
+    for (const item of items) {
+      const cat = item.category;
+      const sub = item.subcategory || 'Other';
+      if (!catMap[cat]) catMap[cat] = {};
+      if (!catMap[cat][sub]) catMap[cat][sub] = [];
+      catMap[cat][sub].push({ n: item.name, tag: item.tag, image: item.image || '' });
+    }
+    const catalog = {}, subs = {};
+    for (const catId of this.CATALOG_IDS) {
+      if (catMap[catId]) {
+        const subNames = Object.keys(catMap[catId]);
+        catalog[catId] = subNames.map(sn => catMap[catId][sn]);
+        subs[catId] = subNames;
+      } else {
+        catalog[catId] = this.CATALOG[catId];
+        subs[catId] = (this.SUBS.en || {})[catId] || [];
+      }
+    }
+    return { catalog, subs };
+  }
+
+  renderVals() {
+    const lang = this.state.lang;
+    const t = this.T[lang] || this.T.en;
+    const pad = (i) => String(i + 1).padStart(2, '0');
+    const ui = this.UI[lang] || this.UI.en;
+    const derived = this.state.catalogData ? this.getCatalogFromData(this.state.catalogData) : null;
+    const activeCatalog = derived ? derived.catalog : this.CATALOG;
+    const activeSubs = derived ? derived.subs : (this.SUBS[lang] || this.SUBS.en);
+
+    const route = this.state.route || { level: 'home' };
+    const isHome = route.level === 'home';
+    const isCat = route.level === 'cat';
+    const isSub = route.level === 'sub';
+    const isCatalog = isCat || isSub;
+    let catName = '', subsT = [], catItems = [], crumbCat = '', crumbSub = '', catPage = null, subPage = null;
+    if (isCatalog) {
+      const ci = route.cat;
+      const catId = this.CATALOG_IDS[ci];
+      catName = t.cats.items[ci] ? t.cats.items[ci].n : '';
+      subsT = activeSubs[catId] || [];
+      catItems = activeCatalog[catId] || [];
+      crumbCat = catName;
+      if (isCat) {
+        catPage = { name: catName, subs: subsT.map((nm, i) => ({ name: nm, count: (catItems[i] || []).length, onOpen: () => this.openSub(ci, i) })) };
+      }
+      if (isSub) {
+        crumbSub = subsT[route.sub] || '';
+        const items = catItems[route.sub] || [];
+        subPage = { name: subsT[route.sub] || '', catName: catName, count: items.length, onBack: () => this.openCat(ci), items: items.map(it => ({
+          n: it.n, tag: it.tag,
+          imgLabel: it.image ? '' : '[ photo ]',
+          imgBoxStyle: it.image
+            ? { position:'relative', aspectRatio:'4/3', backgroundImage:`url('${it.image}')`, backgroundSize:'cover', backgroundPosition:'center' }
+            : { position:'relative', aspectRatio:'4/3', background:'repeating-linear-gradient(135deg,#191a1d,#191a1d 11px,#141417 11px,#141417 22px)' }
+        })) };
+      }
+    }
+
+    const navItems = [
+      { label: t.nav.equipment, href: '#equipment' },
+      { label: t.nav.packages, href: '#packages' },
+      { label: t.nav.how, href: '#how' },
+      { label: t.nav.gallery, href: '#gallery' },
+      { label: t.nav.why, href: '#why' },
+      { label: t.nav.faq, href: '#faq' },
+      { label: t.nav.contact, href: '#contact' }
+    ].map(o => ({ label: o.label, href: o.href, onNav: (e) => { if (e && e.preventDefault) e.preventDefault(); this.onNav(o.href); } }));
+
+    const langCards = this.LANGS.map(l => ({
+      code: l.code, name: l.name, upper: l.code.toUpperCase(),
+      onPick: () => this.pickLang(l.code),
+      onChoose: () => this.chooseLang(l.code)
+    }));
+
+    const cats = t.cats.items.map((c, i) => ({ n: c.n, d: c.d, tag: this.TAGS[i], num: pad(i), view: ui.view, onOpen: () => this.openCat(i) }));
+    const steps = t.how.steps.map((s, i) => ({ t: s.t, d: s.d, num: pad(i) }));
+    const packages = t.pk.items.map(p => ({ tag: p.tag, n: p.n, d: p.d }));
+    const whys = t.why.items;
+    const gallery = t.gal.items;
+    const faqList = t.faq.items.map((f, i) => ({
+      q: f.q, a: f.a, open: this.state.openFaq === i, sign: this.state.openFaq === i ? '–' : '+',
+      onToggle: () => this.toggleFaq(i)
+    }));
+
+    const bars = Array.from({ length: 22 });
+    const eqEl = React.createElement('div', {
+      style: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: '5px', padding: '28px 26px' }
+    }, bars.map((_, i) => React.createElement('div', {
+      key: i,
+      style: {
+        width: '7px', flex: '0 0 auto', height: '100%', transformOrigin: 'bottom', borderRadius: '3px',
+        background: 'linear-gradient(180deg, var(--accent,#ff5a1f), color-mix(in srgb, var(--accent,#ff5a1f) 25%, transparent))',
+        animation: `eqbar ${(1 + (i % 5) * 0.22).toFixed(2)}s ease-in-out ${(i * 0.07).toFixed(2)}s infinite`,
+        opacity: 0.9
+      }
+    })));
+
+    return {
+      lang, curCode: lang.toUpperCase(),
+      showOverlay: this.state.showOverlay,
+      langMenuOpen: this.state.langMenuOpen,
+      toggleLangMenu: () => this.toggleLangMenu(),
+      langCards,
+      navItems, navCta: t.nav.cta,
+      ov: t.ov,
+      hero: t.hero,
+      statShow: this.props.showStats ?? true,
+      stats: [
+        { v: '1,200+', l: t.hero.stat1 },
+        { v: '500+', l: t.hero.stat2 },
+        { v: '12', l: t.hero.stat3 }
+      ],
+      eqEl,
+      catsHead: t.cats, cats,
+      howHead: t.how, steps,
+      pkHead: t.pk, packages, pkCta: t.pk.cta,
+      whyHead: t.why, whys,
+      galHead: t.gal, gallery,
+      faqHead: t.faq, faqList,
+      formT: t.form, eventTypes: t.form.types,
+      onSubmit: (e) => this.onSubmit(e), sent: this.state.sent,
+      cPhone: this.contact.phone, cEmail: this.contact.email, cCity: this.contact.city,
+      ui, isHome, isCat, isSub, isCatalog,
+      catPage, subPage, crumbCat, crumbSub,
+      onCrumbCat: () => { if (isCatalog) this.openCat(route.cat); else this.goHome(); },
+      goHome: () => this.goHome(),
+      goHomeLang: () => this.goHomeLang(),
+      goContact: () => this.goContact(),
+      foot: t.foot
+    };
+  }
+}
+</script>
+</body>
+</html>

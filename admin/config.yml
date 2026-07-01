@@ -1,0 +1,65 @@
+# ─────────────────────────────────────────────
+#  Dali Sound — Sveltia CMS configuration
+#  Docs: https://github.com/sveltia/sveltia-cms
+# ─────────────────────────────────────────────
+#
+#  SETUP STEPS:
+#  1. Push this project to a GitHub repository
+#  2. Replace GITHUB_USERNAME and REPO_NAME below
+#  3. Deploy to Netlify / Vercel / Cloudflare Pages
+#  4. Visit yoursite.com/admin to log in with GitHub
+
+backend:
+  name: github
+  repo: GITHUB_USERNAME/REPO_NAME   # ← change this
+  branch: main
+
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: equipment
+    label: Equipment Catalog
+    files:
+      - label: All Equipment Items
+        name: items
+        file: catalog.json
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            label_singular: Item
+            summary: "{{fields.name}} — {{fields.subcategory}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+                hint: "e.g. Shure SLX-D"
+              - label: Category
+                name: category
+                widget: select
+                options:
+                  - { label: "Speakers & PA",  value: spk }
+                  - { label: "Keyboards",       value: key }
+                  - { label: "Drums",           value: drm }
+                  - { label: "Guitars",         value: gtr }
+                  - { label: "Microphones",     value: mic }
+                  - { label: "Mixers",          value: mix }
+                  - { label: "Lighting & FX",   value: lgt }
+              - label: Subcategory
+                name: subcategory
+                widget: string
+                hint: "e.g. Wireless, Digital consoles, Moving heads"
+              - label: "Type / Tag"
+                name: tag
+                widget: string
+                hint: "Short label shown on the card, e.g. Digital wireless"
+              - label: Photo
+                name: image
+                widget: image
+                required: false
+                allow_multiple: false
+              - label: Description
+                name: description
+                widget: text
+                required: false

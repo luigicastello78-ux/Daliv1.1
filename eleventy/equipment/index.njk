@@ -1,0 +1,32 @@
+---
+pageTitle: Equipment Catalog
+---
+{% extends "layout.njk" %}
+{% block content %}
+<section style="max-width:1100px;margin:0 auto;padding:52px 24px 88px;">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span>
+    <span class="cur">Equipment</span>
+  </nav>
+  <div style="margin-bottom:42px;">
+    <h1 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(30px,4vw,48px);letter-spacing:-.02em;margin:0 0 12px;">Everything you need on stage</h1>
+    <p style="color:#9b9ba2;font-size:16px;margin:0;">Browse all categories or go straight to what you need.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:18px;">
+    {% for cat in categories %}
+    {% set count = collections.equipment | catCount(cat.id) %}
+    <a href="/equipment/{{ cat.id }}/" class="eq-card">
+      <div style="position:relative;aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#191a1d,#191a1d 11px,#141417 11px,#141417 22px);">
+        <span style="position:absolute;bottom:10px;left:12px;font-size:11px;letter-spacing:.08em;color:#6f6f76;background:rgba(0,0,0,.4);padding:4px 8px;border-radius:6px;">[ photo ]</span>
+        <span style="position:absolute;top:10px;right:12px;font-family:'Sora',sans-serif;font-weight:700;font-size:13px;color:#ff5a1f;">{{ loop.index | pad2 }}</span>
+      </div>
+      <div style="padding:18px;">
+        <h2 style="font-family:'Sora',sans-serif;font-weight:700;font-size:18px;margin:0 0 7px;">{{ cat.name }}</h2>
+        <p style="color:#9b9ba2;font-size:14px;line-height:1.5;margin:0 0 13px;">{{ cat.desc }}</p>
+        <span style="color:#ff5a1f;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;">{{ count }} models →</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

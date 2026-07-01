@@ -1,0 +1,692 @@
+{
+  "items": [
+    {
+      "name": "RCF HDL 50-A",
+      "category": "spk",
+      "subcategory": "Line arrays",
+      "tag": "Active line array",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF HDL 30-A",
+      "category": "spk",
+      "subcategory": "Line arrays",
+      "tag": "Active line array",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF HDL 6-A",
+      "category": "spk",
+      "subcategory": "Line arrays",
+      "tag": "Compact line array",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF ART 945-A",
+      "category": "spk",
+      "subcategory": "Main speakers",
+      "tag": "Active full-range",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF ART 932-A",
+      "category": "spk",
+      "subcategory": "Main speakers",
+      "tag": "Active full-range",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF ART 912-A",
+      "category": "spk",
+      "subcategory": "Main speakers",
+      "tag": "Active full-range",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF SUB 9007-AS",
+      "category": "spk",
+      "subcategory": "Subwoofers",
+      "tag": "Active subwoofer",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF SUB 8004-AS",
+      "category": "spk",
+      "subcategory": "Subwoofers",
+      "tag": "Active subwoofer",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF SUB 905-AS",
+      "category": "spk",
+      "subcategory": "Subwoofers",
+      "tag": "Active subwoofer",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF NX 12-SMA",
+      "category": "spk",
+      "subcategory": "Stage monitors",
+      "tag": "Stage monitor",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF TT 08-AS",
+      "category": "spk",
+      "subcategory": "Stage monitors",
+      "tag": "Stage monitor",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "RCF ART 715-A",
+      "category": "spk",
+      "subcategory": "Stage monitors",
+      "tag": "Multi-purpose monitor",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Nord Stage 4",
+      "category": "key",
+      "subcategory": "Stage pianos",
+      "tag": "Stage piano",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha CP88",
+      "category": "key",
+      "subcategory": "Stage pianos",
+      "tag": "Stage piano",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Roland RD-2000",
+      "category": "key",
+      "subcategory": "Stage pianos",
+      "tag": "Stage piano",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Korg Minilogue",
+      "category": "key",
+      "subcategory": "Synthesizers",
+      "tag": "Analog synth",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Roland Juno-X",
+      "category": "key",
+      "subcategory": "Synthesizers",
+      "tag": "Synthesizer",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Moog Subsequent 37",
+      "category": "key",
+      "subcategory": "Synthesizers",
+      "tag": "Analog synth",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Korg Kronos",
+      "category": "key",
+      "subcategory": "Workstations",
+      "tag": "Workstation",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha Montage M",
+      "category": "key",
+      "subcategory": "Workstations",
+      "tag": "Workstation",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Roland Fantom",
+      "category": "key",
+      "subcategory": "Workstations",
+      "tag": "Workstation",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Akai MPK261",
+      "category": "key",
+      "subcategory": "MIDI controllers",
+      "tag": "MIDI controller",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Arturia KeyLab 88",
+      "category": "key",
+      "subcategory": "MIDI controllers",
+      "tag": "MIDI controller",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "NI Komplete Kontrol",
+      "category": "key",
+      "subcategory": "MIDI controllers",
+      "tag": "MIDI controller",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Pearl Masters",
+      "category": "drm",
+      "subcategory": "Acoustic kits",
+      "tag": "Acoustic kit",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha Stage Custom",
+      "category": "drm",
+      "subcategory": "Acoustic kits",
+      "tag": "Acoustic kit",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "DW Performance",
+      "category": "drm",
+      "subcategory": "Acoustic kits",
+      "tag": "Acoustic kit",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Roland TD-27",
+      "category": "drm",
+      "subcategory": "Electronic kits",
+      "tag": "Electronic kit",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha DTX10",
+      "category": "drm",
+      "subcategory": "Electronic kits",
+      "tag": "Electronic kit",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Alesis Strike Pro",
+      "category": "drm",
+      "subcategory": "Electronic kits",
+      "tag": "Electronic kit",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Zildjian A Custom",
+      "category": "drm",
+      "subcategory": "Cymbals & hardware",
+      "tag": "Cymbal pack",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Sabian AAX",
+      "category": "drm",
+      "subcategory": "Cymbals & hardware",
+      "tag": "Cymbal pack",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Hardware pack",
+      "category": "drm",
+      "subcategory": "Cymbals & hardware",
+      "tag": "Stands & pedals",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "LP Congas",
+      "category": "drm",
+      "subcategory": "Percussion",
+      "tag": "Percussion",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Cajon",
+      "category": "drm",
+      "subcategory": "Percussion",
+      "tag": "Percussion",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Roland SPD-SX",
+      "category": "drm",
+      "subcategory": "Percussion",
+      "tag": "Sampling pad",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Fender Stratocaster",
+      "category": "gtr",
+      "subcategory": "Electric guitars",
+      "tag": "Electric guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Gibson Les Paul",
+      "category": "gtr",
+      "subcategory": "Electric guitars",
+      "tag": "Electric guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "PRS SE",
+      "category": "gtr",
+      "subcategory": "Electric guitars",
+      "tag": "Electric guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Taylor 214ce",
+      "category": "gtr",
+      "subcategory": "Acoustic guitars",
+      "tag": "Acoustic guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Martin D-28",
+      "category": "gtr",
+      "subcategory": "Acoustic guitars",
+      "tag": "Acoustic guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha FG",
+      "category": "gtr",
+      "subcategory": "Acoustic guitars",
+      "tag": "Acoustic guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Fender Jazz Bass",
+      "category": "gtr",
+      "subcategory": "Bass guitars",
+      "tag": "Bass guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Music Man StingRay",
+      "category": "gtr",
+      "subcategory": "Bass guitars",
+      "tag": "Bass guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Ibanez SR",
+      "category": "gtr",
+      "subcategory": "Bass guitars",
+      "tag": "Bass guitar",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Fender Twin Reverb",
+      "category": "gtr",
+      "subcategory": "Amplifiers",
+      "tag": "Guitar amp",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Marshall JCM800",
+      "category": "gtr",
+      "subcategory": "Amplifiers",
+      "tag": "Guitar amp",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Ampeg SVT",
+      "category": "gtr",
+      "subcategory": "Amplifiers",
+      "tag": "Bass amp",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure BLX",
+      "category": "mic",
+      "subcategory": "Wireless",
+      "tag": "Wireless system",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure SLX-D",
+      "category": "mic",
+      "subcategory": "Wireless",
+      "tag": "Digital wireless",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure QLX-D",
+      "category": "mic",
+      "subcategory": "Wireless",
+      "tag": "Digital wireless",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure ULX-D",
+      "category": "mic",
+      "subcategory": "Wireless",
+      "tag": "Digital wireless",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure Axient Digital",
+      "category": "mic",
+      "subcategory": "Wireless",
+      "tag": "Digital wireless",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Sennheiser EW-DX",
+      "category": "mic",
+      "subcategory": "Wireless",
+      "tag": "Digital wireless",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure SM58",
+      "category": "mic",
+      "subcategory": "Wired / dynamic",
+      "tag": "Dynamic vocal mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure SM57",
+      "category": "mic",
+      "subcategory": "Wired / dynamic",
+      "tag": "Dynamic instrument mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure Beta 58A",
+      "category": "mic",
+      "subcategory": "Wired / dynamic",
+      "tag": "Dynamic vocal mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Sennheiser e835",
+      "category": "mic",
+      "subcategory": "Wired / dynamic",
+      "tag": "Dynamic vocal mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Sennheiser e945",
+      "category": "mic",
+      "subcategory": "Wired / dynamic",
+      "tag": "Dynamic vocal mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure KSM9",
+      "category": "mic",
+      "subcategory": "Condenser",
+      "tag": "Condenser vocal mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Neumann KMS 105",
+      "category": "mic",
+      "subcategory": "Condenser",
+      "tag": "Condenser vocal mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "AKG C414",
+      "category": "mic",
+      "subcategory": "Condenser",
+      "tag": "Studio condenser",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Rode NT1",
+      "category": "mic",
+      "subcategory": "Condenser",
+      "tag": "Studio condenser",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure Beta 91A",
+      "category": "mic",
+      "subcategory": "Instrument mics",
+      "tag": "Kick drum mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Shure SM81",
+      "category": "mic",
+      "subcategory": "Instrument mics",
+      "tag": "Instrument condenser",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "DPA 4099",
+      "category": "mic",
+      "subcategory": "Instrument mics",
+      "tag": "Clip-on instrument mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Sennheiser e904",
+      "category": "mic",
+      "subcategory": "Instrument mics",
+      "tag": "Drum mic",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Allen & Heath SQ-6",
+      "category": "mix",
+      "subcategory": "Digital consoles",
+      "tag": "Digital console",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha CL5",
+      "category": "mix",
+      "subcategory": "Digital consoles",
+      "tag": "Digital console",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Midas M32",
+      "category": "mix",
+      "subcategory": "Digital consoles",
+      "tag": "Digital console",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Behringer X32",
+      "category": "mix",
+      "subcategory": "Digital consoles",
+      "tag": "Digital console",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Allen & Heath GL2400",
+      "category": "mix",
+      "subcategory": "Analog consoles",
+      "tag": "Analog console",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Soundcraft GB4",
+      "category": "mix",
+      "subcategory": "Analog consoles",
+      "tag": "Analog console",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha MG Series",
+      "category": "mix",
+      "subcategory": "Analog consoles",
+      "tag": "Analog mixer",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Allen & Heath DT168",
+      "category": "mix",
+      "subcategory": "Stage boxes",
+      "tag": "Stage box",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Midas DL32",
+      "category": "mix",
+      "subcategory": "Stage boxes",
+      "tag": "Stage box",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Yamaha Rio3224",
+      "category": "mix",
+      "subcategory": "Stage boxes",
+      "tag": "Stage box",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Robe Pointe",
+      "category": "lgt",
+      "subcategory": "Moving heads",
+      "tag": "Moving head",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Martin MAC Aura",
+      "category": "lgt",
+      "subcategory": "Moving heads",
+      "tag": "Moving head wash",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Chauvet Rogue",
+      "category": "lgt",
+      "subcategory": "Moving heads",
+      "tag": "Moving head",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "LED PAR 64",
+      "category": "lgt",
+      "subcategory": "Wash & PAR",
+      "tag": "PAR wash",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Chauvet COLORdash",
+      "category": "lgt",
+      "subcategory": "Wash & PAR",
+      "tag": "LED wash",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "ADJ Mega Wash",
+      "category": "lgt",
+      "subcategory": "Wash & PAR",
+      "tag": "LED wash",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "MDG Hazer",
+      "category": "lgt",
+      "subcategory": "Haze & effects",
+      "tag": "Haze machine",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "Smoke machine",
+      "category": "lgt",
+      "subcategory": "Haze & effects",
+      "tag": "Fog effect",
+      "image": "",
+      "description": ""
+    },
+    {
+      "name": "CO2 jet",
+      "category": "lgt",
+      "subcategory": "Haze & effects",
+      "tag": "Special effect",
+      "image": "",
+      "description": ""
+    }
+  ]
+}

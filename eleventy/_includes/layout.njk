@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if pageTitle %}{{ pageTitle }} — {% endif %}Dali Sound</title>
+  <meta name="description" content="{% if description %}{{ description }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Language overlay (shown via JS if no language chosen yet) -->
+<div id="lang-overlay" class="lang-overlay" style="display:none;">
+  <div style="max-width:780px;width:100%;text-align:center;">
+    <div style="display:inline-flex;align-items:flex-end;gap:4px;height:34px;justify-content:center;">
+      <div style="width:6px;height:46%;background:#ff5a1f;border-radius:3px;"></div>
+      <div style="width:6px;height:100%;background:#ff5a1f;border-radius:3px;"></div>
+      <div style="width:6px;height:64%;background:#fff;border-radius:3px;"></div>
+      <div style="width:6px;height:88%;background:#ff5a1f;border-radius:3px;"></div>
+      <div style="width:6px;height:40%;background:#fff;border-radius:3px;"></div>
+    </div>
+    <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:24px;letter-spacing:.16em;color:#fff;margin-top:14px;">DALI<span style="color:#ff5a1f;">SOUND</span></div>
+    <div style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#ff5a1f;margin-top:26px;">Welcome to Dali Sound</div>
+    <h2 style="font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(30px,5vw,52px);line-height:1.05;letter-spacing:-.02em;margin:14px 0 12px;color:#fff;">Choose your language</h2>
+    <p style="color:#a9a9b0;font-size:16px;line-height:1.6;max-width:520px;margin:0 auto;">Professional sound &amp; instrument rental for every event.</p>
+    <div id="lang-grid" style="margin-top:34px;display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;"></div>
+    <p style="color:#6f6f76;font-size:13px;margin-top:26px;">You can change the language anytime from the menu.</p>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:22px;">
+    <a id="logo-link" href="/" style="display:flex;align-items:center;gap:11px;text-decoration:none;flex:0 0 auto;">
+      <div style="display:flex;align-items:flex-end;gap:3px;height:22px;">
+        <div style="width:4px;height:45%;background:#ff5a1f;border-radius:2px;"></div>
+        <div style="width:4px;height:100%;background:#ff5a1f;border-radius:2px;"></div>
+        <div style="width:4px;height:64%;background:#fff;border-radius:2px;"></div>
+        <div style="width:4px;height:85%;background:#ff5a1f;border-radius:2px;"></div>
+        <div style="width:4px;height:40%;background:#fff;border-radius:2px;"></div>
+      </div>
+      <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:17px;letter-spacing:.14em;color:#fff;">DALI<span style="color:#ff5a1f;">SOUND</span></span>
+    </a>
+    <nav class="nav-menu" style="margin-left:auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="/equipment/" class="nav-link">Equipment</a>
+      <a href="/#packages" class="nav-link">Packages</a>
+      <a href="/#how" class="nav-link">How it works</a>
+      <a href="/#gallery" class="nav-link">Gallery</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+      <a href="/#contact" class="nav-link">Contact</a>
+    </nav>
+    <div style="position:relative;flex:0 0 auto;">
+      <button id="lang-toggle" type="button" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;letter-spacing:.06em;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block;"></span>
+        <span id="lang-code">EN</span>
+        <span style="font-size:9px;color:#9a9aa0;">▼</span>
+      </button>
+      <div id="lang-menu" class="lang-dropdown" hidden></div>
+    </div>
+    <a href="/#contact" class="btn btn-accent" style="flex:0 0 auto;padding:9px 16px;font-size:13px;border-radius:10px;">Get a quote</a>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<!-- Footer -->
+<footer style="border-top:1px solid rgba(255,255,255,.08);padding:46px 0 40px;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="display:flex;align-items:flex-end;gap:3px;height:18px;">
+          <div style="width:3.5px;height:45%;background:#ff5a1f;border-radius:2px;"></div>
+          <div style="width:3.5px;height:100%;background:#ff5a1f;border-radius:2px;"></div>
+          <div style="width:3.5px;height:64%;background:#fff;border-radius:2px;"></div>
+          <div style="width:3.5px;height:85%;background:#ff5a1f;border-radius:2px;"></div>
+        </div>
+        <span style="font-family:'Sora',sans-serif;font-weight:800;font-size:15px;letter-spacing:.14em;color:#fff;">DALI<span style="color:#ff5a1f;">SOUND</span></span>
+      </div>
+      <p style="color:#86868d;font-size:14px;margin:0;max-width:360px;line-height:1.55;">Professional sound &amp; instrument rental for events of every size.</p>
+    </div>
+    <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+      <div style="color:#86868d;font-size:14px;line-height:1.8;">
+        <div style="color:#c4c4ca;font-weight:600;">{{ site.phone }}</div>
+        <div>{{ site.email }}</div>
+        <div>{{ site.city }}</div>
+      </div>
+      <p style="color:#6f6f76;font-size:13px;margin:0;">&copy; 2026 Dali Sound. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
